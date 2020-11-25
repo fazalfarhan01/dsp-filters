@@ -43,6 +43,13 @@ function getOrder() {
         variablesFromForm.stopBandFrequency = variablesFromForm.stopBandFrequency * Math.PI * 2;
     }
 
+    // showResult("\\(N  \\geq   \\frac{\\log_{10} [\\frac{ \\frac{1}{A_{s}^{2}}-1}{\\frac{1}{A_{p}^{2}}-1}]}{2 \\times  \\log_{10}  \\frac{ \\Omega _{s} }{\\Omega _{9}} }\\)");
+
+    showResult("Pass Band Gain = " + variablesFromForm.minPassBandGain);
+    showResult("Pass Band Frequency = " + parseFloat(variablesFromForm.passBandFrequency).toFixed(2));
+    showResult("Stop Band Frequency = " + parseFloat(variablesFromForm.stopBandFrequency).toFixed(2));
+    showResult("Stop Band Gain = " + variablesFromForm.maxStopBandGain);
+
     if (document.getElementById("gainType").value == "decibles") {
         var order = orderFromDecibles(variablesFromForm.minPassBandGain, variablesFromForm.maxStopBandGain, variablesFromForm.passBandFrequency, variablesFromForm.stopBandFrequency);
     } else {
