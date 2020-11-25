@@ -1,3 +1,15 @@
+function showOrder() {
+    showResult("ORDER OF THE FILTER IS: " + getOrder());
+}
+function showCutoff() {
+    cutofffrequency = getCutoff()
+    if (document.getElementById("frequencyType").value == "hz") {
+        showResult("CUTOFF FEQUENCY IN Hz IS: " + cutofffrequency);
+    }
+    else {
+        showResult("CUTOFF FEQUENCY In Rad/sec IS: " + cutofffrequency);
+    }
+}
 
 function getCutoff() {
     var variablesFromForm = Array.from(document.querySelectorAll("#findOrderFrom input")).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
@@ -20,15 +32,7 @@ function getCutoff() {
         var frequency2 = cutofffreqfornodecibles(variablesFromForm.maxStopBandGain, variablesFromForm.stopBandFrequency, getOrder());
     }
     cutofffrequency = (frequency1 + frequency2) / 2;
-    resultContainer = document.getElementById("resultOrder");
-    resultContainer.style.display = "block";
-    if (document.getElementById("frequencyType").value == "hz") {
-        resultContainer.innerText = "CUTOFF FEQUENCY IN hz IS: " + cutofffrequency;
-    }
-    else {
-        resultContainer.innerText = "CUTOFF FEQUENCY In rad/sec IS: " + cutofffrequency;
-    }
-
+    return cutofffrequency;
 }
 
 
@@ -44,17 +48,13 @@ function getOrder() {
     } else {
         var order = orderFromNonDecibles(variablesFromForm.minPassBandGain, variablesFromForm.maxStopBandGain, variablesFromForm.passBandFrequency, variablesFromForm.stopBandFrequency);
     }
-
-    resultContainer = document.getElementById("resultOrder");
-    resultContainer.style.display = "block";
-    resultContainer.innerText = "ORDER OF THE FILTER IS: " + order;
     return order;
 }
 
 
 function cutofffreqfornodecibles(Gain, freq, _filteOrderN) {
     numerator = freq;
-    denominator = Math.pow((1/Math.pow(Gain, 2) - 1), 1 / (2 * _filteOrderN));
+    denominator = Math.pow((1 / Math.pow(Gain, 2) - 1), 1 / (2 * _filteOrderN));
     return (numerator / denominator);
 }
 
@@ -74,4 +74,17 @@ function orderFromDecibles(minPassBandGain, maxStopBandGain, passBandFreq, stopB
     var numerator = Math.log10((Math.pow(10, 0.1 * maxStopBandGain) - 1) / (Math.pow(10, 0.1 * minPassBandGain) - 1));
     var denominator = 2 * Math.log10(stopBandFreq / passBandFreq);
     return Math.ceil(numerator / denominator);
+}
+
+function showResult(newLine) {
+    resultContainer = document.getElementById("resultOrder");
+    resultContainer.style.display = "block";
+    newLine = newLine + "\n";
+    resultContainer.innerText = resultContainer.innerText + newLine;
+}
+
+function clearResults() {
+    resultContainer = document.getElementById("resultOrder");
+    resultContainer.innerText = "";
+    resultContainer.style.display = "none";
 }

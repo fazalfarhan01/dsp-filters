@@ -15,7 +15,7 @@
 		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 	<!-- Non-UI Imports -->
-	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 	<script src="assets/js/logic/main.js"></script>
 </head>
 
@@ -118,15 +118,15 @@
 							<div class="row">
 								<div class="col-4 col-12-small">
 									<ul class="actions">
-										<li><a onclick="getOrder()" class="button icon solid fa-search scrolly">Find
+										<li><a onclick="showOrder()" class="button icon solid fa-search scrolly">Find
 												Order</a></li>
-										<li><a onclick="getCutoff()" class="button icon solid fa-search scrolly">Find
+										<li><a onclick="showCutoff()" class="button icon solid fa-search scrolly">Find
 												Cutoff</a></li>
-										<li><input type="reset" value="Reset"></li>
+										<li><input type="reset" value="Reset" onclick="clearResults()"></li>
 									</ul>
 								</div>
 								<div class="col-12">
-									<h3 id="resultOrder">
+									<h3 id="resultOrder" style="display: none;">
 									</h3>
 								</div>
 							</div>
