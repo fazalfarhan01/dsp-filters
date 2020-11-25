@@ -1,4 +1,9 @@
 <!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html lang="en">
 
 <head>
@@ -9,160 +14,183 @@
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
+	<!-- Non-UI Imports -->
 	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
 	<script src="assets/js/logic/main.js"></script>
 </head>
 
 <body class="is-preload">
 
-	<!-- Sidebar -->
-	<section id="sidebar">
-		<div class="inner">
+	<!-- Page Wrapper -->
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<h1><a href="index.html">Home</a></h1>
 			<nav>
-				<ul>
-					<li><a href="#intro">Home</a></li>
-					<li><a href="#filterOrder">Filter Order</a></li>
-					<!-- <li><a href="#two">What we do</a></li> -->
-					<!-- <li><a href="#three">Get in touch</a></li> -->
-				</ul>
+				<a href="#menu">Menu</a>
 			</nav>
-		</div>
-	</section>
+		</header>
 
-	<!-- Wrapper -->
-	<div id="wrapper">
-
-		<!-- Intro -->
-		<section id="intro" class="wrapper style1 fullscreen fade-up">
+		<!-- Menu -->
+		<nav id="menu">
 			<div class="inner">
-				<h1>DSP Digital Filter Design</h1>
-				<h2>Implementations</h2>
+				<h2>Menu</h2>
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="#filterOrder">Filter Order</a></li>
+					<li><a href="#filterOrder">Filter Cutoff</a></li>
+					<li><a href="https://github.com/fazalfarhan01/dsp-filters"
+							class="button primary icon solid fa-github brands" target="_blank">View on GitHub</a></li>
+				</ul>
+				<a href="#" class="close">Close</a>
+			</div>
+		</nav>
+
+		<!-- Banner -->
+		<section id="banner">
+			<div class="inner">
+				<div class="logo"><span class="icon fa-gem"></span></div>
+				<h2>DSP Digital Filter Design</h2>
+				<h3>Implementations</h3>
 				<div class="row">
-					<div class="col-6 col-12-medium">
-						<ul class="actions">
-							<li>
-								<h3>Order of Analog Filter</h3>
-							</li>
+					<div class="col-6 col-12-small">
+						<ul class="actions fit">
+							<li><a href="#filterOrder" class="button">Filter Order</a></li>
 						</ul>
 					</div>
-					<div class="col-6 col-12-medium">
-						<ul class="actions">
-							<li><a href="#filterOrder" class="button scrolly">Find Filter Order</a></li>
+					<div class="col-6 col-12-small">
+						<ul class="actions fit">
+							<li><a href="#filterOrder" class="button primary">Filter Cutoff</a></li>
+						</ul>
+					</div>
+					<div class="col-6 col-12-small">
+						<ul class="actions fit">
+							<li><a href="#" class="button">Yet To Impliment</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- One -->
-		<section id="filterOrder" class="wrapper style2 spotlights fullscreen">
-			<section>
-				<!-- <a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a> -->
-				<div class="content">
-					<div class="inner">
-						<section>
-							<h2>ORDER OF ANALOG FILTER</h2>
-							<form id="findOrderFrom">
-								<div class="row gtr-uniform">
-									<div class="col-12 col-12-xsmall">
-										<select name="gainType" id="gainType">
-											<option value="">Select Gain Type</option>
-											<option value="direct">Normal</option>
-											<option value="decibles">Decibles</option>
-										</select>
-									</div>
-									<div class="col-6 col-12-xsmall">
-										<input type="text" name="minPassBandGain" id="minPassBandGain"
-											placeholder="Minimum Pass Band Gain">
-									</div>
-									<div class="col-6 col-12-xsmall">
-										<input type="text" name="maxStopBandGain" id="maxStopBandGain"
-											placeholder="Maximum Stop Band Gain">
-									</div>
-									<div class="col-12">
-										<select name="frequencyType" id="frequencyType">
-											<option value="">Select Frequency Type</option>
-											<option value="hz">Hz</option>
-											<option value="rads">Rad/s</option>
-										</select>
-									</div>
-									<div class="col-6 col-12-xsmall">
-										<input type="text" name="passBandFrequency" id="passBandFrequency"
-											placeholder="Enter Pass Band Frequency - Ωp">
-									</div>
-									<div class="col-6 col-12-xsmall">
-										<input type="text" name="stopBandFrequency" id="stopBandFrequency"
-											placeholder="Enter Stop Band Frequency - Ωs">
-									</div>
+		<!-- Wrapper -->
+		<section id="wrapper">
 
-									<div class="col-12">
-										<ul class="actions">
-											<li><a onclick="getOrder()" href="#resultOrder" class="button icon solid fa-search scrolly">Find
-													Order</a></li>
-											<li><input type="reset" value="Reset"></li>
-										</ul>
-									</div>
-
-									<div class="col-12">
-										<blockquote>
-										<h3  id="resultOrder">
-										</h3>
-										</blockquote>
-									</div>
+			<!-- filterOrder -->
+			<section id="filterOrder" class="wrapper spotlight style3">
+				<div class="inner">
+					<div class="content">
+						<h2 class="major">ORDER & CUTOFF OF ANALOG FILTER</h2>
+						<form id="findOrderFrom">
+							<div class="row gtr-uniform">
+								<div class="col-12 col-12-xsmall">
+									<select name="gainType" id="gainType">
+										<option value="">Select Gain Type</option>
+										<option value="direct">Normal</option>
+										<option value="decibles">Decibles</option>
+									</select>
 								</div>
-							</form>
-						</section>
-
+								<div class="col-6 col-12-small">
+									<input type="text" name="minPassBandGain" id="minPassBandGain"
+										placeholder="Minimum Pass Band Gain">
+								</div>
+								<div class="col-6 col-12-small">
+									<input type="text" name="maxStopBandGain" id="maxStopBandGain"
+										placeholder="Maximum Stop Band Gain">
+								</div>
+								<div class="col-12">
+									<select name="frequencyType" id="frequencyType">
+										<option value="">Select Frequency Type</option>
+										<option value="hz">Hz</option>
+										<option value="rads">Rad/s</option>
+									</select>
+								</div>
+								<div class="col-6 col-12-small">
+									<input type="text" name="passBandFrequency" id="passBandFrequency"
+										placeholder="Enter Pass Band Frequency - Ωp">
+								</div>
+								<div class="col-6 col-12-small">
+									<input type="text" name="stopBandFrequency" id="stopBandFrequency"
+										placeholder="Enter Stop Band Frequency - Ωs">
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-4 col-12-small">
+									<ul class="actions">
+										<li><a onclick="getOrder()" class="button icon solid fa-search scrolly">Find
+												Order</a></li>
+										<li><a onclick="getCutoff()" class="button icon solid fa-search scrolly">Find
+												Cutoff</a></li>
+										<li><input type="reset" value="Reset"></li>
+									</ul>
+								</div>
+								<div class="col-12">
+									<h3 id="resultOrder">
+									</h3>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</section>
-			<!-- <section>
-				<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
-				<div class="content">
-					<div class="inner">
-						<h2>Feugiat consequat</h2>
-						<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies
-							erat malesuada quis. Aliquam dapibus.</p>
-						<ul class="actions">
-							<li><a href="generic.html" class="button">Learn more</a></li>
-						</ul>
-					</div>
-				</div>
-			</section>
-			<section>
-				<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
-				<div class="content">
-					<div class="inner">
-						<h2>Ultricies aliquam</h2>
-						<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies
-							erat malesuada quis. Aliquam dapibus.</p>
-						<ul class="actions">
-							<li><a href="generic.html" class="button">Learn more</a></li>
-						</ul>
-					</div>
-				</div>
-			</section> -->
 		</section>
-	</div>
 
-	<!-- Footer -->
-	<footer id="footer" class="wrapper style1-alt">
-		<div class="inner">
-			<ul class="menu">
-				<li>&copy; <a href="https://fazals.ddns.net">DeepFocus</a>. All rights reserved.</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-	</footer>
+		<!-- Footer -->
+		<section id="footer">
+			<div class="inner">
+				<!-- <h2 class="major">Get in touch</h2>
+				<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce
+					tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in
+					tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+				<form method="post" action="#">
+					<div class="fields">
+						<div class="field">
+							<label for="name">Name</label>
+							<input type="text" name="name" id="name" />
+						</div>
+						<div class="field">
+							<label for="email">Email</label>
+							<input type="email" name="email" id="email" />
+						</div>
+						<div class="field">
+							<label for="message">Message</label>
+							<textarea name="message" id="message" rows="4"></textarea>
+						</div>
+					</div>
+					<ul class="actions">
+						<li><input type="submit" value="Send Message" /></li>
+					</ul>
+				</form> -->
+				<ul class="contact">
+					<li class="icon solid fa-home">
+						Rajiv Nagar<br />
+						Mysore, Karnataka<br />
+						India.
+					</li>
+					<li class="icon solid fa-phone"><a href="tel:+919731265150" target="_blank">+91 9731 265 150</a></li>
+					<li class="icon solid fa-envelope"><a href="mailto:fazal.farhan@gmail.com" target="_blank">fazal.farhan@gmail.com</a></li>
+					<li class="icon brands fa-twitter"><a href="//twitter.com/fazalfarhan04" target="_blank">twitter.com/fazalfarhan04</a></li>
+					<li class="icon brands fa-facebook-f"><a href="//facebook.com/mohamedfarhanf1" target="_blank">facebook.com/mohamedfarhanf1</a></li>
+					<li class="icon brands fa-instagram"><a href="//instagram.com/fazal.farhan" target="_blank">instagram.com/fazal.farhan</a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; <a href="//fazals.ddns.net" target="_blank">DeepFocus</a>. All rights reserved.</li>
+					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</section>
+
+	</div>
 
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
 	<script src="assets/js/browser.min.js"></script>
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
 
 </body>
 

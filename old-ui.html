@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<title>DSP - Digital Filter Design</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+	<script src="assets/js/logic/main.js"></script>
+</head>
+
+<body class="is-preload">
+
+	<!-- Sidebar -->
+	<section id="sidebar">
+		<div class="inner">
+			<nav>
+				<ul>
+					<li><a href="#intro">Home</a></li>
+					<li><a href="#filterOrder">Filter Order</a></li>
+					<!-- <li><a href="#two">What we do</a></li> -->
+					<!-- <li><a href="#three">Get in touch</a></li> -->
+				</ul>
+			</nav>
+		</div>
+	</section>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Intro -->
+		<section id="intro" class="wrapper style1 fullscreen fade-up">
+			<div class="inner">
+				<h1>DSP Digital Filter Design</h1>
+				<h2>Implementations</h2>
+				<div class="row">
+					<div class="col-6 col-12-medium">
+						<ul class="actions">
+							<li>
+								<h3>Order of Analog Filter</h3>
+							</li>
+						</ul>
+					</div>
+					<div class="col-6 col-12-medium">
+						<ul class="actions">
+							<li><a href="#filterOrder" class="button scrolly">Find Filter Order</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- One -->
+		<section id="filterOrder" class="wrapper style2 spotlights fullscreen">
+			<section>
+				<!-- <a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a> -->
+				<div class="content">
+					<div class="inner">
+						<section>
+							<h2>ORDER OF ANALOG FILTER</h2>
+							<form id="findOrderFrom">
+								<div class="row gtr-uniform">
+									<div class="col-12 col-12-xsmall">
+										<select name="gainType" id="gainType">
+											<option value="">Select Gain Type</option>
+											<option value="direct">Normal</option>
+											<option value="decibles">Decibles</option>
+										</select>
+									</div>
+									<div class="col-6 col-12-xsmall">
+										<input type="text" name="minPassBandGain" id="minPassBandGain"
+											placeholder="Minimum Pass Band Gain">
+									</div>
+									<div class="col-6 col-12-xsmall">
+										<input type="text" name="maxStopBandGain" id="maxStopBandGain"
+											placeholder="Maximum Stop Band Gain">
+									</div>
+									<div class="col-12">
+										<select name="frequencyType" id="frequencyType">
+											<option value="">Select Frequency Type</option>
+											<option value="hz">Hz</option>
+											<option value="rads">Rad/s</option>
+										</select>
+									</div>
+									<div class="col-6 col-12-xsmall">
+										<input type="text" name="passBandFrequency" id="passBandFrequency"
+											placeholder="Enter Pass Band Frequency - Ωp">
+									</div>
+									<div class="col-6 col-12-xsmall">
+										<input type="text" name="stopBandFrequency" id="stopBandFrequency"
+											placeholder="Enter Stop Band Frequency - Ωs">
+									</div>
+
+									<div class="col-12">
+										<ul class="actions">
+											<li><a onclick="getOrder()" href="#resultOrder" class="button icon solid fa-search scrolly">Find
+													Order</a></li>
+											<li><input type="reset" value="Reset"></li>
+										</ul>
+									</div>
+
+									<div class="col-12">
+										<blockquote>
+										<h3  id="resultOrder">
+										</h3>
+										</blockquote>
+									</div>
+								</div>
+							</form>
+						</section>
+
+					</div>
+				</div>
+			</section>
+			<!-- <section>
+				<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+				<div class="content">
+					<div class="inner">
+						<h2>Feugiat consequat</h2>
+						<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies
+							erat malesuada quis. Aliquam dapibus.</p>
+						<ul class="actions">
+							<li><a href="generic.html" class="button">Learn more</a></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section>
+				<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+				<div class="content">
+					<div class="inner">
+						<h2>Ultricies aliquam</h2>
+						<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies
+							erat malesuada quis. Aliquam dapibus.</p>
+						<ul class="actions">
+							<li><a href="generic.html" class="button">Learn more</a></li>
+						</ul>
+					</div>
+				</div>
+			</section> -->
+		</section>
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper style1-alt">
+		<div class="inner">
+			<ul class="menu">
+				<li>&copy; <a href="https://fazals.ddns.net">DeepFocus</a>. All rights reserved.</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
