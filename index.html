@@ -38,8 +38,8 @@
 				<h2>Menu</h2>
 				<ul class="links">
 					<li><a href="index.html">Home</a></li>
-					<li><a href="#filterOrder">Filter Order</a></li>
-					<li><a href="#filterOrder">Filter Cutoff</a></li>
+					<li><a href="#filterOrder">Filter Order/Cutoff</a></li>
+					<!-- <li><a href="#filterOrder">Filter Cutoff</a></li> -->
 					<li><a href="https://github.com/fazalfarhan01/dsp-filters"
 							class="button primary icon solid fa-github brands" target="_blank">View on GitHub</a></li>
 				</ul>
@@ -54,14 +54,14 @@
 				<h2>DSP Digital Filter Design</h2>
 				<h3>Implementations</h3>
 				<div class="row">
-					<div class="col-6 col-12-small">
+					<div class="col-12 col-12-small">
 						<ul class="actions fit">
-							<li><a href="#filterOrder" class="button">Filter Order</a></li>
+							<li><a href="#filterOrder" class="button">Filter Order/Cutoff</a></li>
 						</ul>
 					</div>
 					<div class="col-6 col-12-small">
 						<ul class="actions fit">
-							<li><a href="#filterOrder" class="button primary">Filter Cutoff</a></li>
+							<li><a href="#" class="button primary">Yet To Implement</a></li>
 						</ul>
 					</div>
 					<div class="col-6 col-12-small">
@@ -140,11 +140,8 @@
 		<!-- Footer -->
 		<section id="footer">
 			<div class="inner">
-				<!-- <h2 class="major">Get in touch</h2>
-				<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce
-					tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in
-					tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
-				<form method="post" action="#">
+				<h2 class="major">Get in touch</h2>
+				<form id="contactForm">
 					<div class="fields">
 						<div class="field">
 							<label for="name">Name</label>
@@ -160,24 +157,32 @@
 						</div>
 					</div>
 					<ul class="actions">
-						<li><input type="submit" value="Send Message" /></li>
+						<li>
+							<!-- <input type="button" value="Send Message" onclick="grabDataForMail()"/> -->
+							<a class="button" onclick="grabDataForMail()">Send Message</a>
+						</li>
 					</ul>
-				</form> -->
+				</form>
 				<ul class="contact">
 					<li class="icon solid fa-home">
 						Rajiv Nagar<br />
 						Mysore, Karnataka<br />
 						India.
 					</li>
-					<li class="icon solid fa-phone"><a href="tel:+919731265150" target="_blank">+91 9731 265 150</a></li>
-					<li class="icon solid fa-envelope"><a href="mailto:fazal.farhan@gmail.com" target="_blank">fazal.farhan@gmail.com</a></li>
-					<li class="icon brands fa-twitter"><a href="//twitter.com/fazalfarhan04" target="_blank">twitter.com/fazalfarhan04</a></li>
-					<li class="icon brands fa-facebook-f"><a href="//facebook.com/mohamedfarhanf1" target="_blank">facebook.com/mohamedfarhanf1</a></li>
-					<li class="icon brands fa-instagram"><a href="//instagram.com/fazal.farhan" target="_blank">instagram.com/fazal.farhan</a></li>
+					<li class="icon solid fa-phone"><a href="tel:+919731265150" target="_blank">+91 9731 265 150</a>
+					</li>
+					<li class="icon solid fa-envelope"><a href="mailto:fazal.farhan@gmail.com"
+							target="_blank">fazal.farhan@gmail.com</a></li>
+					<li class="icon brands fa-twitter"><a href="//twitter.com/fazalfarhan04"
+							target="_blank">twitter.com/fazalfarhan04</a></li>
+					<li class="icon brands fa-facebook-f"><a href="//facebook.com/mohamedfarhanf1"
+							target="_blank">facebook.com/mohamedfarhanf1</a></li>
+					<li class="icon brands fa-instagram"><a href="//instagram.com/fazal.farhan"
+							target="_blank">instagram.com/fazal.farhan</a></li>
 				</ul>
 				<ul class="copyright">
 					<li>&copy; <a href="//fazals.ddns.net" target="_blank">DeepFocus</a>. All rights reserved.</li>
-					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					<!-- <li>Design: <a href="http://html5up.net">HTML5 UP</a></li> -->
 				</ul>
 			</div>
 		</section>
@@ -192,6 +197,10 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
+
+	<!-- Contact Form Backed -->
+	<script src="assets/js/logic/contactForm.js"></script>
+	<script src="https://smtpjs.com/v3/smtp.js"></script>
 
 </body>
 
