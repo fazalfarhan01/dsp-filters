@@ -2,6 +2,10 @@ $(document).ready(function () {
     $("#contactForm").submit(function () {
         alert("Your Request has been submitted successfully.\nWe will contact you shortly.\n\nThank you..!");
         // clearContactForm();
+        setTimeout(function(){
+            console.log("Clearing Form");
+            clearContactForm();
+        }, 2000);
     });
 });
 
