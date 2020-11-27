@@ -141,7 +141,9 @@
 		<section id="footer">
 			<div class="inner">
 				<h2 class="major">Get in touch</h2>
-				<form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbzjay3jgxVXf3GGPXFDLnuk6u97aI-yW11ImEJ4JA/exec" target="hidden_iframe">
+				<form id="contactForm" method="POST"
+					action="https://script.google.com/macros/s/AKfycbzjay3jgxVXf3GGPXFDLnuk6u97aI-yW11ImEJ4JA/exec"
+					target="hidden_iframe">
 					<div class="fields">
 						<div class="field">
 							<label for="name">Name</label>
@@ -158,7 +160,7 @@
 					</div>
 					<ul class="actions">
 						<li>
-							<input type="submit" value="Send Message">
+							<input type="submit" value="Send Message" onclick="clearContactForm()">
 						</li>
 					</ul>
 				</form>
@@ -200,7 +202,6 @@
 
 	<!-- Contact Form Backed -->
 	<script src="assets/js/logic/contactForm.js"></script>
-	<script src="https://smtpjs.com/v3/smtp.js"></script>
 
 </body>
 
