@@ -7,199 +7,192 @@
 <html lang="en">
 
 <head>
-	<title>DSP - Digital Filter Design</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript>
+    <title>DSP - Digital Filter Design</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-	<!-- Non-UI Imports -->
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-	<script src="assets/js/logic/main.js"></script>
+    <!-- PWA Imports and Scripts -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <script src="/assets/js/pwa/index.js" type="text/javascript"></script>
+
+    <!-- Non-UI Imports -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <script src="/assets/js/logic/main.js"></script>
 </head>
 
 <body class="is-preload">
 
-	<!-- Page Wrapper -->
-	<div id="page-wrapper">
+    <!-- Page Wrapper -->
+    <div id="page-wrapper">
 
-		<!-- Header -->
-		<header id="header" class="alt">
-			<h1><a href="index.html">Home</a></h1>
-			<nav>
-				<a href="#menu">Menu</a>
-			</nav>
-		</header>
+        <!-- Header -->
+        <header id="header" class="alt">
+            <h1><a href="index.html">Home</a></h1>
+            <nav>
+                <a href="#menu">Menu</a>
+            </nav>
+        </header>
 
-		<!-- Menu -->
-		<nav id="menu">
-			<div class="inner">
-				<h2>Menu</h2>
-				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="#filterOrder">Filter Order/Cutoff</a></li>
-					<!-- <li><a href="#filterOrder">Filter Cutoff</a></li> -->
-					<li><a href="https://github.com/fazalfarhan01/dsp-filters"
-							class="button primary icon solid fa-github brands" target="_blank">View on GitHub</a></li>
-				</ul>
-				<a href="#" class="close">Close</a>
-			</div>
-		</nav>
+        <!-- Menu -->
+        <nav id="menu">
+            <div class="inner">
+                <h2>Menu</h2>
+                <ul class="links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#filterOrder">Filter Order/Cutoff</a></li>
+                    <!-- <li><a href="#filterOrder">Filter Cutoff</a></li> -->
+                    <li><a href="https://github.com/fazalfarhan01/dsp-filters" class="button primary icon solid fa-github brands" target="_blank">View on GitHub</a></li>
+                </ul>
+                <a href="#" class="close">Close</a>
+            </div>
+        </nav>
 
-		<!-- Banner -->
-		<section id="banner">
-			<div class="inner">
-				<div class="logo"><span class="icon fa-gem"></span></div>
-				<h2>DSP Digital Filter Design</h2>
-				<h3>Implementations</h3>
-				<div class="row">
-					<div class="col-12 col-12-small">
-						<ul class="actions fit">
-							<li><a href="#filterOrder" class="button">Filter Order/Cutoff</a></li>
-						</ul>
-					</div>
-					<div class="col-6 col-12-small">
-						<ul class="actions fit">
-							<li><a href="#" class="button primary">Yet To Implement</a></li>
-						</ul>
-					</div>
-					<div class="col-6 col-12-small">
-						<ul class="actions fit">
-							<li><a href="#" class="button">Yet To Impliment</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</section>
+        <!-- Banner -->
+        <section id="banner">
+            <div class="inner">
+                <div class="logo"><span class="icon fa-gem"></span></div>
+                <h2>DSP Digital Filter Design</h2>
+                <h3>Implementations</h3>
+                <div class="row">
+                    <div class="col-12 col-12-small">
+                        <ul class="actions fit">
+                            <li><a href="#filterOrder" class="button">Filter Order/Cutoff</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-12-small">
+                        <ul class="actions fit">
+                            <li><a href="#" class="button primary">Yet To Implement</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-12-small">
+                        <ul class="actions fit">
+                            <li><a href="#" class="button">Yet To Impliment</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-		<!-- Wrapper -->
-		<section id="wrapper">
+        <!-- Wrapper -->
+        <section id="wrapper">
 
-			<!-- filterOrder -->
-			<section id="filterOrder" class="wrapper spotlight style3">
-				<div class="inner">
-					<div class="content">
-						<br><br>
-						<h2 class="major">ORDER & CUTOFF OF ANALOG FILTER</h2>
-						<form id="findOrderFrom">
-							<div class="row gtr-uniform">
-								<div class="col-12 col-12-xsmall">
-									<select name="gainType" id="gainType">
+            <!-- filterOrder -->
+            <section id="filterOrder" class="wrapper spotlight style3">
+                <div class="inner">
+                    <div class="content">
+                        <br><br>
+                        <h2 class="major">ORDER & CUTOFF OF ANALOG FILTER</h2>
+                        <form id="findOrderFrom">
+                            <div class="row gtr-uniform">
+                                <div class="col-12 col-12-xsmall">
+                                    <select name="gainType" id="gainType">
 										<option value="">Select Gain Type</option>
 										<option value="direct">Normal</option>
 										<option value="decibles">Decibles</option>
 									</select>
-								</div>
-								<div class="col-6 col-12-small">
-									<input type="text" name="minPassBandGain" id="minPassBandGain"
-										placeholder="Minimum Pass Band Gain">
-								</div>
-								<div class="col-6 col-12-small">
-									<input type="text" name="maxStopBandGain" id="maxStopBandGain"
-										placeholder="Maximum Stop Band Gain">
-								</div>
-								<div class="col-12">
-									<select name="frequencyType" id="frequencyType">
+                                </div>
+                                <div class="col-6 col-12-small">
+                                    <input type="text" name="minPassBandGain" id="minPassBandGain" placeholder="Minimum Pass Band Gain">
+                                </div>
+                                <div class="col-6 col-12-small">
+                                    <input type="text" name="maxStopBandGain" id="maxStopBandGain" placeholder="Maximum Stop Band Gain">
+                                </div>
+                                <div class="col-12">
+                                    <select name="frequencyType" id="frequencyType">
 										<option value="">Select Frequency Type</option>
 										<option value="hz">Hz</option>
 										<option value="rads">Rad/s</option>
 									</select>
-								</div>
-								<div class="col-6 col-12-small">
-									<input type="text" name="passBandFrequency" id="passBandFrequency"
-										placeholder="Enter Pass Band Frequency - Ωp">
-								</div>
-								<div class="col-6 col-12-small">
-									<input type="text" name="stopBandFrequency" id="stopBandFrequency"
-										placeholder="Enter Stop Band Frequency - Ωs">
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-4 col-12-small">
-									<ul class="actions">
-										<li><a onclick="showOrder()" class="button icon solid fa-search scrolly">Find
+                                </div>
+                                <div class="col-6 col-12-small">
+                                    <input type="text" name="passBandFrequency" id="passBandFrequency" placeholder="Enter Pass Band Frequency - Ωp">
+                                </div>
+                                <div class="col-6 col-12-small">
+                                    <input type="text" name="stopBandFrequency" id="stopBandFrequency" placeholder="Enter Stop Band Frequency - Ωs">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-4 col-12-small">
+                                    <ul class="actions">
+                                        <li><a onclick="showOrder()" class="button icon solid fa-search scrolly">Find
 												Order</a></li>
-										<li><a onclick="showCutoff()" class="button icon solid fa-search scrolly">Find
+                                        <li><a onclick="showCutoff()" class="button icon solid fa-search scrolly">Find
 												Cutoff</a></li>
-										<li><input type="reset" value="Reset" onclick="clearResults()"></li>
-									</ul>
-								</div>
-								<div class="col-12">
-									<h3 id="resultOrder" style="display: none;">
-									</h3>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</section>
-		</section>
+                                        <li><input type="reset" value="Reset" onclick="clearResults()"></li>
+                                    </ul>
+                                </div>
+                                <div class="col-12">
+                                    <h3 id="resultOrder" style="display: none;">
+                                    </h3>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </section>
 
-		<!-- Footer -->
-		<section id="footer">
-			<div class="inner">
-				<h2 class="major">Get in touch</h2>
-				<form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbzjay3jgxVXf3GGPXFDLnuk6u97aI-yW11ImEJ4JA/exec" target="hidden_iframe">
-					<div class="fields">
-						<div class="field">
-							<label for="name">Name</label>
-							<input type="text" name="name" id="name" />
-						</div>
-						<div class="field">
-							<label for="email">Email</label>
-							<input type="email" name="email" id="email" />
-						</div>
-						<div class="field">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="4"></textarea>
-						</div>
-					</div>
-					<ul class="actions">
-						<li>
-							<input type="submit" value="Send Message">
-						</li>
-					</ul>
-					<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-				</form>
-				<ul class="contact">
-					<li class="icon solid fa-home">
-						Rajiv Nagar<br />
-						Mysore, Karnataka<br />
-						India.
-					</li>
-					<li class="icon solid fa-phone"><a href="tel:+919731265150" target="_blank">+91 9731 265 150</a>
-					</li>
-					<li class="icon solid fa-envelope"><a href="mailto:fazal.farhan@gmail.com"
-							target="_blank">fazal.farhan@gmail.com</a></li>
-					<li class="icon brands fa-twitter"><a href="//twitter.com/fazalfarhan04"
-							target="_blank">twitter.com/fazalfarhan04</a></li>
-					<li class="icon brands fa-facebook-f"><a href="//facebook.com/mohamedfarhanf1"
-							target="_blank">facebook.com/mohamedfarhanf1</a></li>
-					<li class="icon brands fa-instagram"><a href="//instagram.com/fazal.farhan"
-							target="_blank">instagram.com/fazal.farhan</a></li>
-				</ul>
-				<ul class="copyright">
-					<li>&copy; <a href="//fazals.ddns.net" target="_blank">DeepFocus</a>. All rights reserved.</li>
-					<!-- <li>Design: <a href="http://html5up.net">HTML5 UP</a></li> -->
-				</ul>
-			</div>
-		</section>
+        <!-- Footer -->
+        <section id="footer">
+            <div class="inner">
+                <h2 class="major">Get in touch</h2>
+                <form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbzjay3jgxVXf3GGPXFDLnuk6u97aI-yW11ImEJ4JA/exec" target="hidden_iframe">
+                    <div class="fields">
+                        <div class="field">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" />
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" />
+                        </div>
+                        <div class="field">
+                            <label for="message">Message</label>
+                            <textarea name="message" id="message" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li>
+                            <input type="submit" value="Send Message">
+                        </li>
+                    </ul>
+                    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+                </form>
+                <ul class="contact">
+                    <li class="icon solid fa-home">
+                        Rajiv Nagar<br /> Mysore, Karnataka<br /> India.
+                    </li>
+                    <li class="icon solid fa-phone"><a href="tel:+919731265150" target="_blank">+91 9731 265 150</a>
+                    </li>
+                    <li class="icon solid fa-envelope"><a href="mailto:fazal.farhan@gmail.com" target="_blank">fazal.farhan@gmail.com</a></li>
+                    <li class="icon brands fa-twitter"><a href="//twitter.com/fazalfarhan04" target="_blank">twitter.com/fazalfarhan04</a></li>
+                    <li class="icon brands fa-facebook-f"><a href="//facebook.com/mohamedfarhanf1" target="_blank">facebook.com/mohamedfarhanf1</a></li>
+                    <li class="icon brands fa-instagram"><a href="//instagram.com/fazal.farhan" target="_blank">instagram.com/fazal.farhan</a></li>
+                </ul>
+                <ul class="copyright">
+                    <li>&copy; <a href="//fazals.ddns.net" target="_blank">DeepFocus</a>. All rights reserved.</li>
+                    <!-- <li>Design: <a href="http://html5up.net">HTML5 UP</a></li> -->
+                </ul>
+            </div>
+        </section>
 
-	</div>
+    </div>
 
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
 
-	<!-- Contact Form Backed -->
-	<script src="assets/js/logic/contactForm.js" type="text/javascript"></script>
+    <!-- Contact Form Backed -->
+    <script src="assets/js/logic/contactForm.js" type="text/javascript"></script>
 
 </body>
 

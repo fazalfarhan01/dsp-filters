@@ -1,0 +1,25 @@
+{
+    "short_name": "DSP-Filter Design",
+    "name": "Digital Signal Processing - Filter Designer App",
+    "description": "This Web App is made to help you design filters in Digital Signal Processing.\nMade by: Mohamed Farhan Fazal",
+    "icons": [{
+        "src": "/images/favicon.png",
+        "type": "image/png",
+        "sizes": "256x256"
+    }],
+    "start_url": "/index.html",
+    "background_color": "#3264a8",
+    "display": "fullscreen",
+    "scope": "/",
+    "theme_color": "#3264a8",
+    "shortcuts": [{
+        "name": "DSP-Filter Design",
+        "short_name": "DSP Calculator",
+        "description": "Design Filter Offline With Our App",
+        "url": "/index.html",
+        "icons": [{
+            "src": "/images/favicon.png",
+            "sizes": "256x256"
+        }]
+    }]
+}
