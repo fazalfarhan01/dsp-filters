@@ -1,26 +1,17 @@
 <!DOCTYPE HTML>
-<!--
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html lang="en">
 
 <head>
-    <title>DSP - Digital Filter Design</title>
+    <title>Generic - Solid State by HTML5 UP</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 
-    <!-- PWA Imports and Scripts -->
-    <link rel="manifest" href="manifest.webmanifest">
-    <script src="/assets/js/pwa/index.js" type="text/javascript"></script>
+    <!-- Linking PWA Files -->
+    <link rel="manifest" href="/manifest.webmanifest">
+    <script src="/assets/js/pwa/index.js"></script>
 
-    <!-- Non-UI Imports -->
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <script src="/assets/js/logic/main.js"></script>
 </head>
 
 <body class="is-preload">
@@ -29,8 +20,8 @@
     <div id="page-wrapper">
 
         <!-- Header -->
-        <header id="header" class="alt">
-            <h1><a href="index.html">Home</a></h1>
+        <header id="header">
+            <h1><a href="./index.html">Solid State</a></h1>
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -50,49 +41,33 @@
             </div>
         </nav>
 
-        <!-- Banner -->
-        <section id="banner">
-            <div class="inner">
-                <div class="logo"><span class="icon fa-gem"></span></div>
-                <h2>DSP Digital Filter Design</h2>
-                <h3>Implementations</h3>
-                <div class="row">
-                    <div class="col-12 col-12-small">
-                        <ul class="actions fit">
-                            <li><a href="#filterOrder" class="button">Filter Order/Cutoff</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-12-small">
-                        <ul class="actions fit">
-                            <li><a href="#" class="button primary">Yet To Implement</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-12-small">
-                        <ul class="actions fit">
-                            <li><a href="#" class="button">Yet To Impliment</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Wrapper -->
         <section id="wrapper">
-
-            <!-- filterOrder -->
-            <section id="filterOrder" class="wrapper spotlight style3">
+            <header>
                 <div class="inner">
+                    <h2>Analog Filter Design</h2>
+                    <p>Step By Step Analog Filter Designer</p>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="wrapper">
+                <div class="inner">
+
+                    <!-- To be Worked on -->
                     <div class="content">
                         <br><br>
-                        <h2 class="major">ORDER & CUTOFF OF ANALOG FILTER</h2>
-                        <form id="findOrderFrom">
+                        <h2 class="major">Analog Filter Designer</h2>
+
+                        <!-- Filter Input Data Form -->
+                        <form id="filterDesignerForm">
                             <div class="row gtr-uniform">
                                 <div class="col-12 col-12-xsmall">
                                     <select name="gainType" id="gainType">
-										<option value="">Select Gain Type</option>
-										<option value="direct">Normal</option>
-										<option value="decibles">Decibles</option>
-									</select>
+                                                <option value="">Select Gain Type</option>
+                                                <option value="direct">Normal</option>
+                                                <option value="decibles">Decibles</option>
+                                            </select>
                                 </div>
                                 <div class="col-6 col-12-small">
                                     <input type="text" name="minPassBandGain" id="minPassBandGain" placeholder="Minimum Pass Band Gain">
@@ -102,10 +77,10 @@
                                 </div>
                                 <div class="col-12">
                                     <select name="frequencyType" id="frequencyType">
-										<option value="">Select Frequency Type</option>
-										<option value="hz">Hz</option>
-										<option value="rads">Rad/s</option>
-									</select>
+                                                <option value="">Select Frequency Type</option>
+                                                <option value="hz">Hz</option>
+                                                <option value="rads">Rad/s</option>
+                                    </select>
                                 </div>
                                 <div class="col-6 col-12-small">
                                     <input type="text" name="passBandFrequency" id="passBandFrequency" placeholder="Enter Pass Band Frequency - Ωp">
@@ -118,22 +93,55 @@
                             <div class="row">
                                 <div class="col-4 col-12-small">
                                     <ul class="actions">
-                                        <li><a onclick="showOrder()" class="button icon solid fa-search scrolly">Find
-												Order</a></li>
-                                        <li><a onclick="showCutoff()" class="button icon solid fa-search scrolly">Find
-												Cutoff</a></li>
+                                        <!-- Order Calculator -->
+                                        <!-- <li><a onclick="null" class="button icon solid fa-search scrolly">Find Order</a></li> -->
+
+                                        <!-- Complete Design Calculator -->
+                                        <li><a onclick="startCalculations()" class="button icon solid fa-search scrolly">Design Filter</a></li>
+
+                                        <!-- Reset Button -->
                                         <li><input type="reset" value="Reset" onclick="clearResults()"></li>
                                     </ul>
                                 </div>
-                                <div class="col-12">
-                                    <h3 id="resultOrder" style="display: none;">
-                                    </h3>
+                                <div class="col-12" id="filterCalculations" style="display: none;">
+                                    <div id="step1">
+                                        <h2>Step 1: Finding Order</h2>
+
+                                        <!-- To Display Input Values -->
+                                        <div id="givenValues">
+                                            <ul class="alt">
+                                                <li id="display_minPassBandGain"></li>
+                                                <li id="display_maxStopBandGain"></li>
+                                                <li id="display_passBandFrequency"></li>
+                                                <li id="display_stopBandFrequency"></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-6 col-12-small">
+                                                <!-- To Display Formulas -->
+                                                <div id="orderFormulaNormal" style="display: none;">
+                                                    \(N\geq\frac{\log_{10}[\frac{\frac{1}{A_{s}^{2}}-1}{\frac{1}{A_{p}^{2}}-1}]}{2\times\log_{10}\frac{\Omega_{s}}{\Omega _{p}}}\)
+                                                </div>
+                                                <div id="orderFormulaDecible" style="display: none;">
+                                                    $ N \geq \frac{\log_{10} [ \frac{10^{0.1 \times A_{s}}-1}{10^{0.1 \times A_{p}}-1}]}{2 \times \log_{10} \frac{ \Omega _{s} }{\Omega _{p}} } $
+                                                </div>
+                                            </div>
+                                            <div class="col-6 col-12-small">
+                                                <!-- To Display Formulas with Values -->
+                                                <div id="orderFormulaWithValues"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
+
                 </div>
-            </section>
+            </div>
+
         </section>
 
         <!-- Footer -->
@@ -188,11 +196,18 @@
     <script src="/assets/js/breakpoints.min.js"></script>
     <script src="/assets/js/util.js"></script>
     <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/jquery.scrolly.min.js"></script>
 
     <!-- Contact Form Backed -->
     <script src="/assets/js/logic/contactForm.js" type="text/javascript"></script>
 
+    <!-- Logical Scripts -->
+    <script src="/assets/js/logic/fullDesignCalculator/main.js"></script>
+
+    <!-- MathJax Scripts -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax Options -->
+    <script src="/assets/js/logic/fullDesignCalculator/mathjaxOptions.js"></script>
 </body>
 
 </html>
