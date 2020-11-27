@@ -15,7 +15,7 @@ function sendEmail(name, email, message) {
     Email.send({
         Host: "smtp-relay.sendinblue.com",
         Username: "fazal.farhan@gmail.com",
-        Password: "xsmtpsib-4769b6720058d667fce5b4885cb8d6bdbde74008e8f8e9b5a6e5df636726c0ad-LVwayQ0EcfD9tUXr",
+        Password: "GET IT FROM SENDINBLUE",
         To: 'fazal.farhan@gmail.com',
         From: "administrator@dspfilters.fazals.ml",
         Subject: `You have a new mail from ${name}`,

@@ -141,7 +141,7 @@
 		<section id="footer">
 			<div class="inner">
 				<h2 class="major">Get in touch</h2>
-				<form id="contactForm">
+				<form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbzjay3jgxVXf3GGPXFDLnuk6u97aI-yW11ImEJ4JA/exec" target="hidden_iframe">
 					<div class="fields">
 						<div class="field">
 							<label for="name">Name</label>
@@ -158,11 +158,11 @@
 					</div>
 					<ul class="actions">
 						<li>
-							<!-- <input type="button" value="Send Message" onclick="grabDataForMail()"/> -->
-							<a class="button" onclick="null">Send Message</a>
+							<input type="submit" value="Send Message">
 						</li>
 					</ul>
 				</form>
+				<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 				<ul class="contact">
 					<li class="icon solid fa-home">
 						Rajiv Nagar<br />
