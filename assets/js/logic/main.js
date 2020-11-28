@@ -1,18 +1,28 @@
 function showOrder() {
-    showResult("ORDER OF THE FILTER IS: " + getOrder());
-}
-function showCutoff() {
-    cutofffrequency = getCutoff()
-    if (document.getElementById("frequencyType").value == "hz") {
-        showResult("CUTOFF FEQUENCY IN Hz IS: " + cutofffrequency);
+    var valid = document.getElementById("findOrderFrom").checkValidity()
+    if (valid) {
+        showResult("ORDER OF THE FILTER IS: " + getOrder());
+    } else {
+        window.alert("Please Enter Valid Options..!");
     }
-    else {
-        showResult("CUTOFF FEQUENCY In Rad/sec IS: " + cutofffrequency);
+}
+
+function showCutoff() {
+    var valid = document.getElementById("findOrderFrom").checkValidity()
+    if (valid) {
+        cutofffrequency = parseFloat(getCutoff()).toFixed(2);
+        if (document.getElementById("frequencyType").value == "hz") {
+            showResult(`CUTOFF FEQUENCY IS: ${cutofffrequency} Hz`);
+        } else {
+            showResult(`CUTOFF FEQUENCY IS: ${cutofffrequency} Rad/s`);
+        }
+    } else {
+        window.alert("Please Enter Valid Options..!");
     }
 }
 
 function getCutoff() {
-    var variablesFromForm = Array.from(document.querySelectorAll("#findOrderFrom input")).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
+    var variablesFromForm = Array.from(document.querySelectorAll("#findOrderFrom input")).reduce((acc, input) => ({...acc, [input.id]: input.value }), {});
     // console.log(variablesFromForm);
 
     if (document.getElementById("frequencyType").value == "hz") {
@@ -37,7 +47,7 @@ function getCutoff() {
 
 
 function getOrder() {
-    var variablesFromForm = Array.from(document.querySelectorAll("#findOrderFrom input")).reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
+    var variablesFromForm = Array.from(document.querySelectorAll("#findOrderFrom input")).reduce((acc, input) => ({...acc, [input.id]: input.value }), {});
     if (document.getElementById("frequencyType").value == "hz") {
         variablesFromForm.passBandFrequency = variablesFromForm.passBandFrequency * Math.PI * 2;
         variablesFromForm.stopBandFrequency = variablesFromForm.stopBandFrequency * Math.PI * 2;

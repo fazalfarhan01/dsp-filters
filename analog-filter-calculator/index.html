@@ -61,83 +61,105 @@
                         <h2 class="major">Analog Filter Designer</h2>
 
                         <!-- Filter Input Data Form -->
-                        <form id="filterDesignerForm">
+                        <form id="filterDesignerForm" method="POST" target="hidden_iframe">
                             <div class="row gtr-uniform">
                                 <div class="col-12 col-12-xsmall">
-                                    <select name="gainType" id="gainType">
+                                    <select name="gainType" id="gainType" required>
                                                 <option value="">Select Gain Type</option>
                                                 <option value="direct">Normal</option>
                                                 <option value="decibles">Decibles</option>
-                                            </select>
+                                    </select>
                                 </div>
                                 <div class="col-6 col-12-small">
-                                    <input type="text" name="minPassBandGain" id="minPassBandGain" placeholder="Minimum Pass Band Gain">
+                                    <input type="text" name="minPassBandGain" id="minPassBandGain" placeholder="Minimum Pass Band Gain" required>
                                 </div>
                                 <div class="col-6 col-12-small">
-                                    <input type="text" name="maxStopBandGain" id="maxStopBandGain" placeholder="Maximum Stop Band Gain">
+                                    <input type="text" name="maxStopBandGain" id="maxStopBandGain" placeholder="Maximum Stop Band Gain" required>
                                 </div>
                                 <div class="col-12">
-                                    <select name="frequencyType" id="frequencyType">
+                                    <select name="frequencyType" id="frequencyType" required>
                                                 <option value="">Select Frequency Type</option>
                                                 <option value="hz">Hz</option>
                                                 <option value="rads">Rad/s</option>
                                     </select>
                                 </div>
                                 <div class="col-6 col-12-small">
-                                    <input type="text" name="passBandFrequency" id="passBandFrequency" placeholder="Enter Pass Band Frequency - Ωp">
+                                    <input type="text" name="passBandFrequency" id="passBandFrequency" placeholder="Enter Pass Band Frequency - Ωp" required>
                                 </div>
                                 <div class="col-6 col-12-small">
-                                    <input type="text" name="stopBandFrequency" id="stopBandFrequency" placeholder="Enter Stop Band Frequency - Ωs">
+                                    <input type="text" name="stopBandFrequency" id="stopBandFrequency" placeholder="Enter Stop Band Frequency - Ωs" required>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-4 col-12-small">
                                     <ul class="actions">
-                                        <!-- Order Calculator -->
-                                        <!-- <li><a onclick="null" class="button icon solid fa-search scrolly">Find Order</a></li> -->
-
                                         <!-- Complete Design Calculator -->
-                                        <li><a onclick="startCalculations()" class="button icon solid fa-search scrolly">Design Filter</a></li>
+                                        <!-- <li><a onclick="startCalculations()" class="button icon solid fa-search scrolly">Design Filter</a></li> -->
+                                        <li><input type="submit" value="Design Filter" onclick="startCalculations()"></li>
 
                                         <!-- Reset Button -->
                                         <li><input type="reset" value="Reset" onclick="clearResults()"></li>
                                     </ul>
                                 </div>
-                                <div class="col-12" id="filterCalculations" style="display: none;">
-                                    <div id="step1">
-                                        <h2>Step 1: Finding Order</h2>
+                            </div>
+                        </form>
+                        <div class="col-12" id="filterCalculations" style="display: none;">
+                            <div id="givenValues">
+                                <ul class="alt">
+                                    <li id="display_minPassBandGain"></li>
+                                    <li id="display_maxStopBandGain"></li>
+                                    <li id="display_passBandFrequency"></li>
+                                    <li id="display_stopBandFrequency"></li>
+                                </ul>
+                            </div>
+                            <div id="step1" style="text-align: center;">
+                                <h2 style="margin-top: 2em; text-align: left;">Step 1: Finding Order - <i>N</i></h2>
 
-                                        <!-- To Display Input Values -->
-                                        <div id="givenValues">
-                                            <ul class="alt">
-                                                <li id="display_minPassBandGain"></li>
-                                                <li id="display_maxStopBandGain"></li>
-                                                <li id="display_passBandFrequency"></li>
-                                                <li id="display_stopBandFrequency"></li>
-                                            </ul>
+                                <!-- To Display Input Values -->
+
+                                <div class="row">
+                                    <div class="col-6 col-12-small">
+                                        <!-- To Display Formulas -->
+                                        <div id="orderFormulaNormal" style="display: none; text-align: center;">
+                                            \(N\geq\frac{\log_{10}[\frac{\frac{1}{A_{s}^{2}}-1}{\frac{1}{A_{p}^{2}}-1}]}{2\times\log_{10}\frac{\Omega_{s}}{\Omega _{p}}}\)
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-6 col-12-small">
-                                                <!-- To Display Formulas -->
-                                                <div id="orderFormulaNormal" style="display: none; text-align: center;">
-                                                    \(N\geq\frac{\log_{10}[\frac{\frac{1}{A_{s}^{2}}-1}{\frac{1}{A_{p}^{2}}-1}]}{2\times\log_{10}\frac{\Omega_{s}}{\Omega _{p}}}\)
-                                                </div>
-                                                <div id="orderFormulaDecible" style="display: none; text-align: center;">
-                                                    $ N \geq \frac{\log_{10} [ \frac{10^{0.1 \times A_{s}}-1}{10^{0.1 \times A_{p}}-1}]}{2 \times \log_{10} \frac{ \Omega _{s} }{\Omega _{p}} } $
-                                                </div>
-                                            </div>
-                                            <div class="col-6 col-12-small">
-                                                <!-- To Display Formulas with Values -->
-                                                <div id="orderFormulaWithValues" style="text-align: center;"></div>
-                                            </div>
+                                        <div id="orderFormulaDecible" style="display: none; text-align: center;">
+                                            $ N \geq \frac{\log_{10} [ \frac{10^{0.1 \times A_{s}}-1}{10^{0.1 \times A_{p}}-1}]}{2 \times \log_{10} \frac{ \Omega _{s} }{\Omega _{p}} } $
                                         </div>
+                                    </div>
+                                    <div class="col-6 col-12-small">
+                                        <!-- To Display Formulas with Values -->
+                                        <div id="orderFormulaWithValues" style="text-align: center;"></div>
+                                    </div>
+                                </div>
+                                <div class="row" style="text-align: center; margin-top: 1em;">
+                                    <div class="col-6 col-12-small">
+                                        <div id="nonRoundedOrder">
 
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-12-small">
+                                        <div id="roundedOrder">
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                            <div class="step2" style="text-align: center;">
+                                <div class="row">
+                                    <h2 style="margin-top: 2em;">Step 2: Calculating Filter Cutoff <i>Ω<sub>c</sub></i></h2>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-12-small" id="passBandCutoff"></div>
+                                    <div class="col-6 col-12-small" id="stopBandCutoff"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" id="finalFilterCutoff">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

@@ -85,49 +85,49 @@
                     <div class="content">
                         <br><br>
                         <h2 class="major">ORDER & CUTOFF OF ANALOG FILTER</h2>
-                        <form id="findOrderFrom">
+                        <form id="findOrderFrom" method="POST" target="hidden_iframe">
                             <div class="row gtr-uniform">
                                 <div class="col-12 col-12-xsmall">
-                                    <select name="gainType" id="gainType">
+                                    <select name="gainType" id="gainType" required>
 										<option value="">Select Gain Type</option>
 										<option value="direct">Normal</option>
 										<option value="decibles">Decibles</option>
 									</select>
                                 </div>
                                 <div class="col-6 col-12-small">
-                                    <input type="text" name="minPassBandGain" id="minPassBandGain" placeholder="Minimum Pass Band Gain">
+                                    <input type="text" name="minPassBandGain" id="minPassBandGain" placeholder="Minimum Pass Band Gain" required>
                                 </div>
                                 <div class="col-6 col-12-small">
-                                    <input type="text" name="maxStopBandGain" id="maxStopBandGain" placeholder="Maximum Stop Band Gain">
+                                    <input type="text" name="maxStopBandGain" id="maxStopBandGain" placeholder="Maximum Stop Band Gain" required>
                                 </div>
                                 <div class="col-12">
-                                    <select name="frequencyType" id="frequencyType">
+                                    <select name="frequencyType" id="frequencyType" required>
 										<option value="">Select Frequency Type</option>
 										<option value="hz">Hz</option>
 										<option value="rads">Rad/s</option>
 									</select>
                                 </div>
                                 <div class="col-6 col-12-small">
-                                    <input type="text" name="passBandFrequency" id="passBandFrequency" placeholder="Enter Pass Band Frequency - Ωp">
+                                    <input type="text" name="passBandFrequency" id="passBandFrequency" placeholder="Enter Pass Band Frequency - Ωp" required>
                                 </div>
                                 <div class="col-6 col-12-small">
-                                    <input type="text" name="stopBandFrequency" id="stopBandFrequency" placeholder="Enter Stop Band Frequency - Ωs">
+                                    <input type="text" name="stopBandFrequency" id="stopBandFrequency" placeholder="Enter Stop Band Frequency - Ωs" required>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-4 col-12-small">
                                     <ul class="actions">
-                                        <li><a onclick="showOrder()" class="button icon solid fa-search scrolly">Find
-												Order</a></li>
-                                        <li><a onclick="showCutoff()" class="button icon solid fa-search scrolly">Find
-												Cutoff</a></li>
+                                        <!-- <li><a onclick="showOrder()" class="button icon solid fa-search scrolly">Find Order</a></li>
+                                        <li><a onclick="showCutoff()" class="button icon solid fa-search scrolly">Find Cutoff</a></li> -->
+                                        <li><input type="submit" value="Find Order" onclick="showOrder()"></li>
+                                        <li><input type="submit" value="Find Cutoff" onclick="showCutoff()"></li>
                                         <li><input type="reset" value="Reset" onclick="clearResults()"></li>
                                     </ul>
                                 </div>
                                 <div class="col-12">
-                                    <h3 id="resultOrder" style="display: none;">
-                                    </h3>
+                                    <p style="font-size: 2em;" id="resultOrder" style="display: none;">
+                                    </p>
                                 </div>
                             </div>
                         </form>

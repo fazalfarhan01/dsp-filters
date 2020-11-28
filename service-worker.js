@@ -1,4 +1,5 @@
-const cacheName = 'dsp-filters-v1';
+const verison = "0.2-beta"
+const cacheName = `dsp-filters-${verison}`;
 const staticAssets = [
     "/",
     "/index.html",
