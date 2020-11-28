@@ -11,11 +11,14 @@ function startCalculations() {
         variablesFromForm.stopBandFrequency = parseFloat((variablesFromForm.stopBandFrequency * Math.PI * 2).toFixed(2));;
     }
 
+    // Formula
+    // \(N\geq\frac{\log_{10}[\frac{\frac{1}{A_{s}^{2}}-1}{\frac{1}{A_{p}^{2}}-1}]}{2\times\log_{10}\frac{\Omega_{s}}{\Omega _{p}}}\)
+
     // Display The Values
-    document.getElementById("display_minPassBandGain").innerText = `\\(Minimum Pass Band Gain (Ap): ${variablesFromForm.minPassBandGain}\\)`;
-    document.getElementById("display_maxStopBandGain").innerText = `\\(Maximum Stop Band Gain (As): ${variablesFromForm.maxStopBandGain}\\)`;
-    document.getElementById("display_passBandFrequency").innerText = `\\(Pass Band Frequency (rad/s): ${variablesFromForm.passBandFrequency}\\)`;
-    document.getElementById("display_stopBandFrequency").innerText = `\\(Stop Band Frequency (rad/s): ${variablesFromForm.stopBandFrequency}\\)`;
+    document.getElementById("display_minPassBandGain").innerText = `\\(A_{p}: ${variablesFromForm.minPassBandGain}\\)`;
+    document.getElementById("display_maxStopBandGain").innerText = `\\(A_{s}: ${variablesFromForm.maxStopBandGain}\\)`;
+    document.getElementById("display_passBandFrequency").innerText = `\\(\\Omega_{p} : ${variablesFromForm.passBandFrequency} rad/s\\)`;
+    document.getElementById("display_stopBandFrequency").innerText = `\\(\\Omega_{s} : ${variablesFromForm.stopBandFrequency} rad/s\\)`;
 
     // Show Values in the Formula
     var normalFormula = `\\(N\\geq\\frac{\\log_{10}[\\frac{\\frac{1}{${variablesFromForm.maxStopBandGain}^{2}}-1}{\\frac{1}{${variablesFromForm.minPassBandGain}^{2}}-1}]}{2\\times\\log_{10}\\frac{${variablesFromForm.stopBandFrequency}}{${variablesFromForm.passBandFrequency}}}\\)`;
