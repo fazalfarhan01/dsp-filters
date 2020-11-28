@@ -75,9 +75,9 @@ function startCalculations() {
             <p>\\(\\Omega_{cs} =  \\frac {${variablesFromForm.stopBandFrequency}}{(\\frac{1}{${variablesFromForm.maxStopBandGain}^{2}-1})^{\\frac{1}{2\\times ${selectedOrder}}}}\\)</p>
             <p>\\(\\Omega_{cs} = ${omegaCs}\\)</p>`;
         }
-        document.getElementById("finalFilterCutoff").innerHTML = `<p>
-        \\( \\Omega_{c} = \\frac {\\Omega_{cp} + \\Omega_{cs}} {2} = \\frac {${omegaCp} + ${omegaCs}} {2} = ${(omegaCs+omegaCp)/2}rad/s\\)
-        </p>`;
+        document.getElementById("finalFilterCutoff1").innerHTML = `<p>\\( \\Omega_{c} = \\frac {\\Omega_{cp} + \\Omega_{cs}} {2}\\)</p>`;
+        document.getElementById("finalFilterCutoff2").innerHTML = `<p>\\(=\\frac {${omegaCp} + ${omegaCs}} {2} \\)</p>`;
+        document.getElementById("finalFilterCutoff3").innerHTML = `<p>\\(=${(omegaCs+omegaCp)/2}rad/s\\)</p>`;
 
 
 
