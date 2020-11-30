@@ -161,6 +161,6 @@ function showResult(newLine) {
 
 function clearResults() {
     resultContainer = document.getElementById("filterResults");
-    resultContainer.innerText = "";
+    resultContainer.innerHTML = "";
     resultContainer.style.display = "none";
 }
