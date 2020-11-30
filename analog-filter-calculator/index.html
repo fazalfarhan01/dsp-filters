@@ -105,6 +105,7 @@
                             </div>
                         </form>
                         <div class="col-12" id="filterCalculations" style="display: none;">
+                            <!-- Given Values -->
                             <div id="givenValues">
                                 <ul class="alt">
                                     <li id="display_minPassBandGain"></li>
@@ -113,6 +114,7 @@
                                     <li id="display_stopBandFrequency"></li>
                                 </ul>
                             </div>
+                            <!-- Step 1 In Filter Design -->
                             <div id="step1" style="text-align: center;">
                                 <h2 style="margin-top: 2em; text-align: left;">Step 1: Finding Order - <i>N</i></h2>
 
@@ -146,9 +148,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="step2" style="text-align: center;">
+                            <!-- Step 2 In Filter Design -->
+                            <div id="step2" style="text-align: center;">
                                 <div class="row">
-                                    <h2 style="margin-top: 2em;">Step 2: Calculating Filter Cutoff <i>Ω<sub>c</sub></i></h2>
+                                    <h2 style="margin-top: 2em; text-align: left;">Step 2: Calculating Filter Cutoff <i>Ω<sub>c</sub></i></h2>
                                 </div>
                                 <div class="row">
                                     <div class="col-6 col-12-small" id="passBandCutoff"></div>
@@ -158,6 +161,19 @@
                                     <div class="col-4 col-12-small" id="finalFilterCutoff1"></div>
                                     <div class="col-4 col-12-small" id="finalFilterCutoff2"></div>
                                     <div class="col-4 col-12-small" id="finalFilterCutoff3"></div>
+                                </div>
+                            </div>
+                            <!-- Step 3 In Filter Design -->
+                            <div id="step3" style="text-align: center;">
+                                <div class="row">
+                                    <h2 style="margin-top: 2em; text-align: left;">Step 3: Designing Normalised Filter</h2>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" id="mainRootsFormula"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 col-12-medium" id="normalisedFilterUnsolved"></div>
+                                    <div class="col-7 col-12-medium" id="normalisedFilterSolved"></div>
                                 </div>
                             </div>
                         </div>
@@ -226,12 +242,17 @@
 
     <!-- Logical Scripts -->
     <script src="/assets/js/logic/fullDesignCalculator/main.js"></script>
+    <script src="/assets/js/logic/fullDesignCalculator/normalisedFilter.js"></script>
 
     <!-- MathJax Scripts -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <!-- MathJax Options -->
     <script src="/assets/js/logic/fullDesignCalculator/mathjaxOptions.js"></script>
+
+    <!-- Math.js -->
+    <script src="https://unpkg.com/mathjs@8.0.1/lib/browser/math.js"></script>
 </body>
 
 </html>

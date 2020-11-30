@@ -45,7 +45,7 @@ function startCalculations() {
 
         // Show Order
         var order = getOrder();
-        var selectedOrder = Math.ceil(order)
+        var selectedOrder = Math.ceil(order);
         document.getElementById("nonRoundedOrder").innerText = `\\(N\\geq ${parseFloat(order.toFixed(4))}\\)`;
         document.getElementById("roundedOrder").innerText = `\\(N = ${selectedOrder}\\)`;
 
@@ -79,7 +79,7 @@ function startCalculations() {
         document.getElementById("finalFilterCutoff2").innerHTML = `<p>\\(=\\frac {${omegaCp} + ${omegaCs}} {2} \\)</p>`;
         document.getElementById("finalFilterCutoff3").innerHTML = `<p>\\(=${(omegaCs+omegaCp)/2}rad/s\\)</p>`;
 
-
+        designNormalised();
 
         // Convert To MathJax Form
         MathJax.typeset();
