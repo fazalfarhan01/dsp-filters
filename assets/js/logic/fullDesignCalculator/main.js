@@ -160,7 +160,7 @@ function showResult(newLine) {
 }
 
 function clearResults() {
-    resultContainer = document.getElementById("filterResults");
-    resultContainer.innerHTML = "";
+    resultContainer = document.getElementById("filterCalculations");
+    // resultContainer.innerHTML = "";
     resultContainer.style.display = "none";
 }

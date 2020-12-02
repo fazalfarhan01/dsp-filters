@@ -30,41 +30,17 @@ function returnNumbers(k, order) {
     return pole;
 }
 
-function deduceEquation(a, b) {
+function deduceEquation(a, b, order) {
 
-    var firstTerm = math.round(2 * a, 3);
-    // let secondTerm = math.round(a ^ 2 + b ^ 2);
-    var secondTerm = 1;
+    // if order is even
+    if (order % 2 == 0) {
+        var firstTerm = math.round(2 * a, 3);
+        var secondTerm = math.round(2 * b, 3);
+        return (String.raw `S^{2} + ${firstTerm}S + 1`);
+    }
 
-    return (String.raw `S^{2} + ${firstTerm}S + ${secondTerm}`);
 }
 
-// UnFinished Lengthy Method
-
-// function eliminateConjugate(rootsArray) {
-//     var rootsArrayRounded = math.round(rootsArray, 1);
-//     var newRoots = [];
-
-//     for (let index = 0; index < rootsArray.length; index++) {
-//         element = rootsArray[index];
-
-//         var isConjugatePresent = false;
-//         for (let inner = 0; inner < rootsArrayRounded.length; inner++) {
-//             const innerElement = rootsArrayRounded[inner];
-//             if (math.round(element["re"], 1) == innerElement["re"]) {
-//                 if (math.round(element["im"], 1) == -innerElement["im"]) {
-//                     isConjugatePresent = true;
-//                 }
-//             }
-//         }
-//         if (isConjugatePresent) {
-//             console.log("Conjugate is present");
-//         }
-
-//     }
-
-//     return newRoots;
-// }
 
 function eliminateConjugate(rootsArray) {
     var splicedArray = rootsArray.splice(0, Math.ceil(rootsArray.length / 2))
@@ -125,9 +101,9 @@ function designNormalised() {
     simplifiedEquation = []
     for (let index = 0; index < nonConjugateRoots.length; index++) {
         let element = nonConjugateRoots[index];
-        simplifiedEquation.push(deduceEquation(math.round(element["re"], 3), math.round(element["im"], 3)));
+        simplifiedEquation.push(deduceEquation(math.round(element["re"], 3), math.round(element["im"], 3), selectedOrder));
     }
 
     var normallised = `<p>${getFinalNormalised(simplifiedEquation)}</p>`;
-    document.getElementById("equations").innerHTML = document.getElementById("equations").innerHTML + normallised;
+    document.getElementById("equations").innerHTML += normallised;
 }
