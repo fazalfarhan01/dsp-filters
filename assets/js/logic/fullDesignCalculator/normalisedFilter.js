@@ -30,13 +30,20 @@ function returnNumbers(k, order) {
     return pole;
 }
 
-function deduceEquation(a, b, order) {
+function deduceEquation(a, b, order, index) {
 
+    console.log(a, b);
     // if order is even
-    if (order % 2 == 0) {
+    if ((order % 2 == 0) || (index < Math.floor(order / 2))) {
         var firstTerm = math.round(2 * a, 3);
         var secondTerm = math.round(2 * b, 3);
+        if (math.round(firstTerm, 2) == 1) {
+            firstTerm = 1;
+        }
         return (String.raw `S^{2} + ${firstTerm}S + 1`);
+    } else {
+        var firstTerm = math.round(a, 3);
+        return (String.raw `S + ${firstTerm}`);
     }
 
 }
@@ -101,7 +108,7 @@ function designNormalised() {
     simplifiedEquation = []
     for (let index = 0; index < nonConjugateRoots.length; index++) {
         let element = nonConjugateRoots[index];
-        simplifiedEquation.push(deduceEquation(math.round(element["re"], 3), math.round(element["im"], 3), selectedOrder));
+        simplifiedEquation.push(deduceEquation(math.round(element["re"], 3), math.round(element["im"], 3), selectedOrder, index));
     }
 
     var normallised = `<p>${getFinalNormalised(simplifiedEquation)}</p>`;
