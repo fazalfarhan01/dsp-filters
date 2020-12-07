@@ -45,7 +45,7 @@ function startCalculations() {
 
         // Show Order
         var order = getOrder();
-        var selectedOrder = Math.ceil(order);
+        selectedOrder = Math.ceil(order);
         document.getElementById("nonRoundedOrder").innerText = `\\(N\\geq ${parseFloat(order.toFixed(4))}\\)`;
         document.getElementById("roundedOrder").innerText = `\\(N = ${selectedOrder}\\)`;
 
@@ -53,31 +53,32 @@ function startCalculations() {
         if (document.getElementById("gainType").value == "decibles") {
 
             // Show Cutoff Formula for decibles
-            var omegaCp = parseFloat((cutoffFreqForDecibles(variablesFromForm.minPassBandGain, variablesFromForm.passBandFrequency, selectedOrder)).toFixed(3));
+            omegaCp = parseFloat((cutoffFreqForDecibles(variablesFromForm.minPassBandGain, variablesFromForm.passBandFrequency, selectedOrder)).toFixed(3));
             document.getElementById("passBandCutoff").innerHTML = `<p>\\(\\Omega_{cp} =  \\frac{\\Omega_{p}}{(10^{0.1A_{p}}-1)^\\frac{1}{2N}}\\)</p>
             <p>\\(\\Omega_{cp} =  \\frac{${variablesFromForm.passBandFrequency}}{(10^{0.1 \\times ${variablesFromForm.minPassBandGain}}-1)^\\frac{1}{2 \\times ${selectedOrder}} }\\)</p>
             <p>\\(\\Omega_{cp} = ${omegaCp}\\)</p>`;
 
-            var omegaCs = parseFloat((cutoffFreqForDecibles(variablesFromForm.maxStopBandGain, variablesFromForm.stopBandFrequency, selectedOrder)).toFixed(3));
+            omegaCs = parseFloat((cutoffFreqForDecibles(variablesFromForm.maxStopBandGain, variablesFromForm.stopBandFrequency, selectedOrder)).toFixed(3));
             document.getElementById("stopBandCutoff").innerHTML = `<p>\\(\\Omega_{cs} =  \\frac{\\Omega_{s}}{(10^{0.1A_{s}}-1)^\\frac{1}{2N}}\\)</p>
             <p>\\(\\Omega_{cs} =  \\frac{${variablesFromForm.stopBandFrequency}}{(10^{0.1 \\times ${variablesFromForm.maxStopBandGain}}-1)^\\frac{1}{2 \\times ${selectedOrder}} }\\)</p>
             <p>\\(\\Omega_{cs} = ${omegaCs}\\)</p>`;
         } else {
 
             // Show Cutoff Formula for Normal Calculations
-            var omegaCp = parseFloat((cutoffFreqForNonDecibles(variablesFromForm.minPassBandGain, variablesFromForm.passBandFrequency, selectedOrder)).toFixed(3))
+            omegaCp = parseFloat((cutoffFreqForNonDecibles(variablesFromForm.minPassBandGain, variablesFromForm.passBandFrequency, selectedOrder)).toFixed(3))
             document.getElementById("passBandCutoff").innerHTML = `<p>\\(\\Omega_{cp} =  \\frac {\\Omega_{p}}{(\\frac{1}{A_{p}^{2}-1})^{\\frac{1}{2N}}}\\)</p>
             <p>\\(\\Omega_{cp} =  \\frac {${variablesFromForm.passBandFrequency}}{(\\frac{1}{${variablesFromForm.minPassBandGain}^{2}-1})^{\\frac{1}{2\\times ${selectedOrder}}}}\\)</p>
             <p>\\(\\Omega_{cp} = ${omegaCp}\\)</p>`;
 
-            var omegaCs = parseFloat((cutoffFreqForNonDecibles(variablesFromForm.maxStopBandGain, variablesFromForm.stopBandFrequency, selectedOrder)).toFixed(3))
+            omegaCs = parseFloat((cutoffFreqForNonDecibles(variablesFromForm.maxStopBandGain, variablesFromForm.stopBandFrequency, selectedOrder)).toFixed(3))
             document.getElementById("stopBandCutoff").innerHTML = `<p>\\(\\Omega_{cs} =  \\frac {\\Omega_{s}}{(\\frac{1}{A_{s}^{2}-1})^{\\frac{1}{2N}}}\\)</p>
             <p>\\(\\Omega_{cs} =  \\frac {${variablesFromForm.stopBandFrequency}}{(\\frac{1}{${variablesFromForm.maxStopBandGain}^{2}-1})^{\\frac{1}{2\\times ${selectedOrder}}}}\\)</p>
             <p>\\(\\Omega_{cs} = ${omegaCs}\\)</p>`;
         }
         document.getElementById("finalFilterCutoff1").innerHTML = `<p>\\( \\Omega_{c} = \\frac {\\Omega_{cp} + \\Omega_{cs}} {2}\\)</p>`;
         document.getElementById("finalFilterCutoff2").innerHTML = `<p>\\(=\\frac {${omegaCp} + ${omegaCs}} {2} \\)</p>`;
-        document.getElementById("finalFilterCutoff3").innerHTML = `<p>\\(=${(omegaCs+omegaCp)/2}rad/s\\)</p>`;
+        omegaC = (omegaCs + omegaCp) / 2;
+        document.getElementById("finalFilterCutoff3").innerHTML = `<p>\\(=${omegaC}rad/s\\)</p>`;
 
         designNormalised();
 
@@ -96,14 +97,14 @@ function getCutoff() {
         variablesFromForm.stopBandFrequency = variablesFromForm.stopBandFrequency * Math.PI * 2;
     }
 
-    console.log(variablesFromForm);
-    console.log(getOrder());
+    // console.log(variablesFromForm);
+    // console.log(getOrder());
     if (document.getElementById("gainType").value == "decibles") {
-        console.log("Triggered decibels")
+        // console.log("Triggered decibels")
         var frequency1 = cutoffFreqForDecibles(variablesFromForm.minPassBandGain, variablesFromForm.passBandFrequency, Math.ceil(getOrder()));
         var frequency2 = cutoffFreqForDecibles(variablesFromForm.maxStopBandGain, variablesFromForm.stopBandFrequency, Math.ceil(getOrder()));
     } else {
-        console.log("Triggered Normal")
+        // console.log("Triggered Normal")
         var frequency1 = cutoffFreqForNonDecibles(variablesFromForm.minPassBandGain, variablesFromForm.passBandFrequency, Math.ceil(getOrder()));
         var frequency2 = cutoffFreqForNonDecibles(variablesFromForm.maxStopBandGain, variablesFromForm.stopBandFrequency, Math.ceil(getOrder()));
     }

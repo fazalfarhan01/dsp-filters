@@ -48,13 +48,6 @@
                 <div class="inner">
                     <h2>Analog Filter Design</h2>
                     <p>Step By Step Analog Filter Designer</p>
-                    <!-- Namecheap Ad -->
-                    <!-- <div class="row">
-                        <div class="col-12" style="text-align: center;">
-                            <a href="https://namecheap.pxf.io/c/2327898/650697/5618" target="_top" id="650697"><img src="//a.impactradius-go.com/display-ad/5618-650697" border="0" alt="" width="728" height="90" /></a><img height="0" width="0" src="https://namecheap.pxf.io/i/2327898/650697/5618" style="position:absolute;visibility:hidden;"
-                                border="0" />
-                        </div>
-                    </div> -->
                 </div>
             </header>
 
@@ -96,6 +89,15 @@
                                 <div class="col-6 col-12-small">
                                     <input type="text" name="stopBandFrequency" id="stopBandFrequency" placeholder="Enter Stop Band Frequency - Ωs" required>
                                 </div>
+                                <!-- Filter Type -->
+                                <div class="col-12">
+                                    <select name="filterType" id="filterType" required>
+                                                <option value="">Select Filter Type</option>
+                                                <option value="lp">Low Pass</option>
+                                                <option value="hp">High Pass</option>
+                                                <!-- <option value="bp">Band Pass</option> -->
+                                    </select>
+                                </div>
                             </div>
                             <hr>
                             <div class="row">
@@ -110,13 +112,6 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- Namecheap Ad -->
-                            <!-- <div class="row">
-                                <div class="col-12" style="text-align: center;">
-                                    <a href="https://namecheap.pxf.io/c/2327898/650697/5618" target="_top" id="650697"><img src="//a.impactradius-go.com/display-ad/5618-650697" border="0" alt="" width="728" height="90" /></a><img height="0" width="0" src="https://namecheap.pxf.io/i/2327898/650697/5618" style="position:absolute;visibility:hidden;"
-                                        border="0" />
-                                </div>
-                            </div> -->
                         </form>
                         <div class="col-12" id="filterCalculations" style="display: none;">
                             <!-- Given Values -->
@@ -195,6 +190,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Step 4 In Filter Design -->
+                            <div id="step4" style="text-align: center;">
+                                <div class="row">
+                                    <h2 style="margin-top: 2em; text-align: left;">Step 4: De-Normalised from Normalised Filter</h2>
+                                </div>
+                                <!-- <div class="row">
+                                    <div class="col-6 col-12-medium" id="replacementEquationWithoutValues"></div>
+                                    <div class="col-6 col-12-medium" id="replacementEquationWithValues"></div>
+                                </div> -->
+                                <div class="row">
+                                    <div class="col-12" id="deNormallised"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -262,6 +270,7 @@
     <!-- Logical Scripts -->
     <script src="/assets/js/logic/fullDesignCalculator/main.js"></script>
     <script src="/assets/js/logic/fullDesignCalculator/normalisedFilter.js"></script>
+    <script src="/assets/js/logic/fullDesignCalculator/denormallisedFilter.js"></script>
 
     <!-- MathJax Scripts -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>

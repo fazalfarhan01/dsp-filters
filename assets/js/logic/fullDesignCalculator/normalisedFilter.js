@@ -32,7 +32,7 @@ function returnNumbers(k, order) {
 
 function deduceEquation(a, b, order, index) {
 
-    console.log(a, b);
+    // console.log(a, b);
     // if order is even
     if ((order % 2 == 0) || (index < Math.floor(order / 2))) {
         var firstTerm = math.round(2 * a, 3);
@@ -113,4 +113,7 @@ function designNormalised() {
 
     var normallised = `<p>${getFinalNormalised(simplifiedEquation)}</p>`;
     document.getElementById("equations").innerHTML += normallised;
+
+    // Design Denormallised
+    deNormallised();
 }
