@@ -2,10 +2,10 @@ function deNormallised() {
     let filterType = document.getElementById("filterType").value;
     switch (filterType) {
         case "lp":
-            var numerator = math.parse((omegaC ** 2).toExponential(2)).toTex();
+            var numerator = math.parse((omegaC ** selectedOrder).toExponential(2)).toTex();
             break;
         case "hp":
-            var numerator = math.parse(`S^2`).toTex();
+            var numerator = math.parse(`S^${selectedOrder}`).toTex();
             break;
         case "bp":
             break;

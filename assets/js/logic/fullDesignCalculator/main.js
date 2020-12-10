@@ -13,6 +13,22 @@ function startCalculations() {
         // Show Results
         document.getElementById("filterCalculations").style.display = "block";
 
+        // Take Absolute Values of Gains
+        variablesFromForm.minPassBandGain = math.abs(variablesFromForm.minPassBandGain);
+        variablesFromForm.maxStopBandGain = math.abs(variablesFromForm.maxStopBandGain);
+
+        // Changing Values on screen
+        document.getElementById("minPassBandGain").value = variablesFromForm.minPassBandGain;
+        document.getElementById("maxStopBandGain").value = variablesFromForm.maxStopBandGain;
+
+        if (variablesFromForm.passBandFrequency > variablesFromForm.stopBandFrequency) {
+            let temp = variablesFromForm.passBandFrequency;
+            variablesFromForm.passBandFrequency = variablesFromForm.stopBandFrequency;
+            variablesFromForm.stopBandFrequency = temp;
+            document.getElementById("passBandFrequency").value = variablesFromForm.passBandFrequency;
+            document.getElementById("stopBandFrequency").value = variablesFromForm.stopBandFrequency;
+        }
+
         // Convert to Rad/Sec
         if (document.getElementById("frequencyType").value == "hz") {
             variablesFromForm.passBandFrequency = parseFloat((variablesFromForm.passBandFrequency * Math.PI * 2).toFixed(2));
@@ -44,7 +60,7 @@ function startCalculations() {
         }
 
         // Show Order
-        var order = getOrder();
+        var order = math.abs(getOrder());
         selectedOrder = Math.ceil(order);
         document.getElementById("nonRoundedOrder").innerText = `\\(N\\geq ${parseFloat(order.toFixed(4))}\\)`;
         document.getElementById("roundedOrder").innerText = `\\(N = ${selectedOrder}\\)`;
