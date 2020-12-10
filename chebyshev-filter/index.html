@@ -14,7 +14,7 @@
 
         gtag('config', 'G-BWNLRQ85BM');
     </script>
-    <title>DSP - Step Wise Analog Filter Designer</title>
+    <title>DSP - Step Wise Chebyshev Filter Designer</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
     <meta name="theme-color" content="#3F4E85">
@@ -23,7 +23,7 @@
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="/images/favicon-192.png">
     <meta name="Description" content="Author: Mohamed Farhan Fazal,
-    Online tool to design DSP Analog Filters. Digital Butterworth Filter - IIT and BLT, Digital Chebyshev Filter - IIT and BLT">
+    Online tool to design DSP Analog Filters. Digital Chebyshev Filter - IIT and BLT, Digital Chebyshev Filter - IIT and BLT">
 
     <!-- Linking PWA Files -->
     <link rel="manifest" href="/manifest.webmanifest">
@@ -50,8 +50,9 @@
                 <h2>Menu</h2>
                 <ul class="links">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/#filterOrder">Filter Order/Cutoff</a></li>
-                    <li><a href="/analog-filter-calculator/">Designer with all steps</a></li>
+                    <!-- <li><a href="/#filterOrder">Filter Order/Cutoff</a></li> -->
+                    <li><a href="/butterworth-filter/">Butterworth Filter</a></li>
+                    <li><a href="/chebyshev-filter/">Chebyshev Filter</a></li>
                     <li><a href="https://github.com/fazalfarhan01/dsp-filters" class="button primary icon solid fa-github brands" target="_blank" rel="noopener" rel="noreferrer">View on GitHub</a></li>
                 </ul>
                 <a href="#" class="close">Close</a>
@@ -62,8 +63,8 @@
         <section id="wrapper">
             <header>
                 <div class="inner">
-                    <h2>Analog Filter Design</h2>
-                    <p>Step By Step Analog Filter Designer</p>
+                    <h2>Chebyshev Filter Design</h2>
+                    <p>Step By Step Chebyshev Filter Designer</p>
                 </div>
             </header>
 
@@ -74,7 +75,7 @@
                     <!-- To be Worked on -->
                     <div class="content">
                         <br><br>
-                        <h2 class="major">Analog Filter Designer</h2>
+                        <h2 class="major">Chebyshev Filter Designer</h2>
 
                         <!-- Filter Input Data Form -->
                         <form id="filterDesignerForm" method="POST" target="hidden_iframe">
@@ -284,16 +285,14 @@
     <script src="/assets/js/logic/contactForm.js" type="text/javascript"></script>
 
     <!-- Logical Scripts -->
-    <script src="/assets/js/logic/fullDesignCalculator/main.js"></script>
-    <script src="/assets/js/logic/fullDesignCalculator/normalisedFilter.js"></script>
-    <script src="/assets/js/logic/fullDesignCalculator/denormallisedFilter.js"></script>
+    <script src="/assets/js/logic/chebyshev-filter/main.js"></script>
 
     <!-- MathJax Scripts -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <!-- MathJax Options -->
-    <script src="/assets/js/logic/fullDesignCalculator/mathjaxOptions.js"></script>
+    <script src="/assets/js/logic/butterworth-filter/mathjaxOptions.js"></script>
 
     <!-- Math.js -->
     <script src="https://unpkg.com/mathjs@8.0.1/lib/browser/math.js"></script>
