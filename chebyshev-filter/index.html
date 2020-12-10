@@ -75,9 +75,51 @@
                     <!-- To be Worked on -->
                     <div class="content">
                         <br><br>
-                        <h2 class="major">Chebyshev Filter Designer</h2>
+                        <!-- Digital to Analog Domain Converter -->
+                        <h2 class="major">Digital to Analog Domain Converter</h2>
+                        <form id="digitalToAnalogConverter" method="POST" target="hidden_iframe">
+                            <div class="row gtr-uniform">
+                                <div class="col-6 col-12-medium">
+                                    <label for="filterConvertionType">Digital Filter Conversion Method</label>
+                                    <select name="filterConvertionType" id="filterConvertionType" required>
+                                        <option value="IIT">IIT - Impulse Invariant Transform</option>
+                                        <option value="BLT">BLT - Bilinear Transform</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 col-12-medium">
+                                    <label for="time">Time</label>
+                                    <input type="text" name="time" id="time" value="1" required>
+                                </div>
+                                <div class="col-6 col-12-medium">
+                                    <label for="digitalOmegaP">Digital - ω<sub>p</sub></label>
+                                    <input type="text" name="digitalOmegaP" id="digitalOmegaP" placeholder="Digital Domain ωp" required>
+                                </div>
+                                <div class="col-6 col-12-medium">
+                                    <label for="digitalOmegaS">Digital - ω<sub>s</sub></label>
+                                    <input type="text" name="digitalOmegaS" id="digitalOmegaS" placeholder="Digital Domain ωs" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- Form Buttons -->
+                            <div class="row">
+                                <div class="col-6 col-12-medium">
+                                    <ul class="actions">
+                                        <li><input type="submit" value="Convert To Analog Domain" id="digital2AnalogSubmitButton"></li>
+                                        <li><input type="reset" value="Reset"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row" style="text-align: center;">
+                            <div class="col-6 col-12-small" id="analogOmegaP"></div>
+                            <div class="col-6 col-12-small" id="analogOmegaS"></div>
+                        </div>
+
 
                         <!-- Filter Input Data Form -->
+                        <br><br>
+                        <h2 class="major">Chebyshev Filter Designer</h2>
+
                         <form id="filterDesignerForm" method="POST" target="hidden_iframe">
                             <div class="row gtr-uniform">
                                 <div class="col-12 col-12-xsmall">
@@ -130,102 +172,9 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="col-12" id="filterCalculations" style="display: none;">
-                            <!-- Given Values -->
-                            <div id="givenValues">
-                                <ul class="alt">
-                                    <li id="display_minPassBandGain"></li>
-                                    <li id="display_maxStopBandGain"></li>
-                                    <li id="display_passBandFrequency"></li>
-                                    <li id="display_stopBandFrequency"></li>
-                                </ul>
-                            </div>
-                            <!-- Step 1 In Filter Design -->
-                            <div id="step1" style="text-align: center;">
-                                <h2 style="margin-top: 2em; text-align: left;">Step 1: Finding Order - <i>N</i></h2>
-
-                                <!-- To Display Input Values -->
-
-                                <div class="row">
-                                    <div class="col-6 col-12-small">
-                                        <!-- To Display Formulas -->
-                                        <div id="orderFormulaNormal" style="display: none; text-align: center;">
-                                            \(N\geq\frac{\log_{10}[\frac{\frac{1}{A_{s}^{2}}-1}{\frac{1}{A_{p}^{2}}-1}]}{2\times\log_{10}\frac{\Omega_{s}}{\Omega _{p}}}\)
-                                        </div>
-                                        <div id="orderFormulaDecible" style="display: none; text-align: center;">
-                                            $ N \geq \frac{\log_{10} [ \frac{10^{0.1 \times A_{s}}-1}{10^{0.1 \times A_{p}}-1}]}{2 \times \log_{10} \frac{ \Omega _{s} }{\Omega _{p}} } $
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-12-small">
-                                        <!-- To Display Formulas with Values -->
-                                        <div id="orderFormulaWithValues" style="text-align: center;"></div>
-                                    </div>
-                                </div>
-                                <div class="row" style="text-align: center; margin-top: 1em;">
-                                    <div class="col-6 col-12-small">
-                                        <div id="nonRoundedOrder">
-
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-12-small">
-                                        <div id="roundedOrder">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Step 2 In Filter Design -->
-                            <div id="step2" style="text-align: center;">
-                                <div class="row">
-                                    <h2 style="margin-top: 2em; text-align: left;">Step 2: Calculating Filter Cutoff <i>Ω<sub>c</sub></i></h2>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 col-12-small" id="passBandCutoff"></div>
-                                    <div class="col-6 col-12-small" id="stopBandCutoff"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4 col-12-small" id="finalFilterCutoff1"></div>
-                                    <div class="col-4 col-12-small" id="finalFilterCutoff2"></div>
-                                    <div class="col-4 col-12-small" id="finalFilterCutoff3"></div>
-                                </div>
-                            </div>
-                            <!-- Step 3 In Filter Design -->
-                            <div id="step3" style="text-align: center;">
-                                <div class="row">
-                                    <h2 style="margin-top: 2em; text-align: left;">Step 3: Designing Normalised Filter</h2>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12" id="mainRootsFormula"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5 col-12-medium" id="normalisedFilterUnsolved"></div>
-                                    <div class="col-7 col-12-medium" id="normalisedFilterSolved"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12" id="equations">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Step 4 In Filter Design -->
-                            <div id="step4" style="text-align: center;">
-                                <div class="row">
-                                    <h2 style="margin-top: 2em; text-align: left;">Step 4: De-Normalised from Normalised Filter</h2>
-                                </div>
-                                <!-- <div class="row">
-                                    <div class="col-6 col-12-medium" id="replacementEquationWithoutValues"></div>
-                                    <div class="col-6 col-12-medium" id="replacementEquationWithValues"></div>
-                                </div> -->
-                                <div class="row">
-                                    <div class="col-12" id="deNormallised"></div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
                 </div>
             </div>
-
         </section>
 
         <!-- Footer -->
