@@ -34,7 +34,10 @@ const staticAssets = [
     "/assets/webfonts/fa-solid-900.ttf",
     "/assets/webfonts/fa-solid-900.woff",
     "/assets/webfonts/fa-solid-900.woff2",
-    "assets/js/pwa/index.js",
+    "/assets/js/pwa/index.js",
+    "//unpkg.com/mathjs@8.0.1/lib/browser/math.js",
+    "//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js",
+    "//polyfill.io/v3/polyfill.min.js?features=es6",
 ];
 
 self.addEventListener('install', async e => {
