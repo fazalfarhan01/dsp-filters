@@ -40,6 +40,9 @@ function convertToAnalogDomain() {
     var digitalToAnalogFormValues = Array.from(document.querySelectorAll("#digitalToAnalogConverter input")).reduce((acc, input) => ({...acc, [input.id]: input.value }), {});
     filterConvertionType = document.getElementById("filterConvertionType").value;
 
+    digitalToAnalogFormValues.digitalOmegaP = math.evaluate(digitalToAnalogFormValues.digitalOmegaP);
+    digitalToAnalogFormValues.digitalOmegaS = math.evaluate(digitalToAnalogFormValues.digitalOmegaS);
+
     if (filterConvertionType == "IIT") {
         // IF FILTER CONVERSION TYPE IN IIT
         var omegaP = digitalToAnalogFormValues.digitalOmegaP / digitalToAnalogFormValues.time;
@@ -55,7 +58,7 @@ function convertToAnalogDomain() {
     omegaS = math.round(omegaS, 3);
 
     // CHANGING UI ELEMENTS
-    document.getElementById("frequencyType").value = "rads";
+    // document.getElementById("frequencyType").value = "rads";
     document.getElementById("passBandFrequency").value = omegaP;
     document.getElementById("stopBandFrequency").value = omegaS;
     document.getElementById("analogOmegaP").innerHTML = String.raw `<p>\( \Omega_{p} = ${omegaP} \space rad/s \)</p>`;
@@ -66,3 +69,91 @@ function convertToAnalogDomain() {
 }
 
 // STEP 1 IMPLEMENTATION END
+
+// STEP 2 IMPLEMENTATION START
+function normalliseSpecifications(variables) {
+    variables.normPassBandFrequency = math.round(variables.passBandFrequency / variables.passBandFrequency, 3);
+    variables.normStopBandFrequency = math.round(variables.stopBandFrequency / variables.passBandFrequency, 3);
+    return variables;
+}
+
+// Function to get variables from form
+function getVars() {
+    let variablesFromForm = {};
+    variablesFromForm = Array.from(document.querySelectorAll("#filterDesignerForm input")).reduce((acc, input) => ({...acc, [input.id]: input.value }), {});
+    variablesFromForm["gainType"] = document.getElementById("gainType").value;
+
+    variablesFromForm.minPassBandGain = math.abs(variablesFromForm.minPassBandGain);
+    variablesFromForm.maxStopBandGain = math.abs(variablesFromForm.maxStopBandGain);
+
+    if (variablesFromForm.passBandFrequency > variablesFromForm.stopBandFrequency) {
+        let temp = variablesFromForm.passBandFrequency;
+        variablesFromForm.passBandFrequency = variablesFromForm.stopBandFrequency;
+        variablesFromForm.stopBandFrequency = temp;
+    }
+
+    document.getElementById("passBandFrequency").value = variablesFromForm.passBandFrequency;
+    document.getElementById("stopBandFrequency").value = variablesFromForm.stopBandFrequency;
+    document.getElementById("minPassBandGain").value = variablesFromForm.minPassBandGain;
+    document.getElementById("maxStopBandGain").value = variablesFromForm.maxStopBandGain;
+
+    return variablesFromForm;
+}
+
+// Function to convert to decibels if in direct form
+function convertToDecibles(variables) {
+    if (variables["gainType"] == "direct") {
+        variables["minPassBandGain"] = math.round(-20 * math.log10(variables["minPassBandGain"]), 3);
+        variables["maxStopBandGain"] = math.round(-20 * math.log10(variables["maxStopBandGain"]), 3);
+    }
+    return variables;
+}
+
+// Function to find epsilon
+function findEpsilonAndOrder(variables) {
+    variables.epsilon = math.round(math.sqrt(math.pow(10, 0.1 * variables.minPassBandGain) - 1), 3);
+    variables.order = math.round((variables.maxStopBandGain - 20 * math.log10(variables.epsilon) + 6) / (6 + 20 * math.log10(variables.normStopBandFrequency)), 3);
+    variables.selectedOrder = math.ceil(variables.order);
+    return variables;
+}
+
+
+// Function to find roots
+function findRoots(variables) {
+    variables.sigma = {};
+    variables.omega = {};
+    for (let index = 1; index <= variables.selectedOrder; index++) {
+        variables.sigma[`sigma${index}`] = -math.sinh((1 / variables.selectedOrder) * math.asinh(1 / variables.epsilon)) * math.sin(((2 * index - 1) / (2 * variables.selectedOrder)) * math.PI);
+        variables.omega[`omega${index}`] = math.cosh((1 / variables.selectedOrder) * math.asinh(1 / variables.epsilon)) * math.cos(((2 * index - 1) / (2 * variables.selectedOrder)) * math.PI);
+    }
+    return variables;
+}
+
+// Function to find K
+function findK(variables) {
+    // If Odd
+    variables.b0 = 1;
+    for (let index = 1; index <= math.ceil(variables.selectedOrder / 2); index++) {
+        variables.b0 = variables.b0 * (math.pow(variables.sigma[`sigma${index}`], 2) + math.pow(variables.omega[`omega${index}`], 2))
+    }
+    if (variables.selectedOrder % 2 == 1) {
+        variables.k = variables.b0;
+    } else {
+        variables.k = variables.b0 / math.sqrt(1 + math.pow(variables.epsilon, 2));
+    }
+    return variables;
+}
+
+
+function designchebyshev() {
+    vars = getVars();
+    vars = convertToDecibles(vars);
+    vars = normalliseSpecifications(vars);
+    vars = findEpsilonAndOrder(vars);
+    vars = findRoots(vars);
+    vars = findK(vars);
+    console.log(vars);
+}
+
+function clearResults() {;
+}

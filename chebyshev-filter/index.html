@@ -137,13 +137,13 @@
                                 <div class="col-6 col-12-small">
                                     <input type="text" name="maxStopBandGain" id="maxStopBandGain" placeholder="Maximum Stop Band Gain" required>
                                 </div>
-                                <div class="col-12">
+                                <!-- <div class="col-12">
                                     <select name="frequencyType" id="frequencyType" required>
                                                 <option value="">Select Frequency Type</option>
                                                 <option value="hz">Hz</option>
                                                 <option value="rads">Rad/s</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class="col-6 col-12-small">
                                     <input type="text" name="passBandFrequency" id="passBandFrequency" placeholder="Enter Pass Band Frequency - Ωp" required>
                                 </div>
@@ -166,7 +166,7 @@
                                     <ul class="actions">
                                         <!-- Complete Design Calculator -->
                                         <!-- <li><a onclick="startCalculations()" class="button icon solid fa-search scrolly">Design Filter</a></li> -->
-                                        <li><input type="submit" value="Design Filter" onclick="startCalculations()"></li>
+                                        <li><input type="submit" value="Design Filter" onclick="designchebyshev()"></li>
 
                                         <!-- Reset Button -->
                                         <li><input type="reset" value="Reset" onclick="clearResults()"></li>
