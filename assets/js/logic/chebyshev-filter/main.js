@@ -153,6 +153,7 @@ function designchebyshev() {
     vars = findRoots(vars);
     vars = findK(vars);
     console.log(vars);
+    MathJax.typeset();
 }
 
 function clearResults() {;
