@@ -133,13 +133,18 @@ function findK(variables) {
     // If Odd
     variables.b0 = 1;
     for (let index = 1; index <= math.ceil(variables.selectedOrder / 2); index++) {
-        variables.b0 = variables.b0 * (math.pow(variables.sigma[`sigma${index}`], 2) + math.pow(variables.omega[`omega${index}`], 2))
+        if (variables.omega[`omega${index}`] != 0) {
+            variables.b0 = variables.b0 * (math.pow(variables.sigma[`sigma${index}`], 2) + math.pow(variables.omega[`omega${index}`], 2));
+        } else {
+            variables.b0 = variables.b0 * (math.abs(variables.sigma[`sigma${index}`]));
+        }
     }
     if (variables.selectedOrder % 2 == 1) {
-        variables.k = variables.b0;
+        variables.k = math.round(variables.b0, 3);
     } else {
-        variables.k = variables.b0 / math.sqrt(1 + math.pow(variables.epsilon, 2));
+        variables.k = math.round(variables.b0 / math.sqrt(1 + math.pow(variables.epsilon, 2)), 3);
     }
+    variables.b0 = math.round(variables.b0, 3);
     return variables;
 }
 
@@ -196,7 +201,8 @@ function displayRootsWithoutValues() {
         rootsList.push(`S-S_{${index}}`);
     }
 
-    rootsBasedOnOrder = String.raw `<p>\( H_{1}(s) = \frac { K } { (${rootsList.join(" )( ")}) } \)</p>`;
+    rootsBasedOnOrder = String.raw `<p>\( H_{1}(s) = \frac { K } { (${rootsList.join(" )( ")}) } \)</p>
+    <p>\( S_{k} = \sigma_{k} + \Omega_{k} \)<p>`;
 
     document.getElementById("rootsBasedOnOrder").innerHTML = rootsBasedOnOrder;
 }
@@ -226,6 +232,45 @@ function displaySigmasAndOmegas() {
     document.getElementById("omegas").innerHTML = omegaString;
 }
 
+// Function to display final normallised equation
+function displayNormallisedEquation() {
+    function deduceEquation(a, b, order, index) {
+        // console.log(a, b);
+        // if order is even
+        if ((order % 2 == 0) || (index < Math.floor(order / 2))) {
+            var firstTerm = math.round(2 * a, 3);
+            var secondTerm = math.round(math.pow(a,2) + math.pow(b,2), 3);
+            if (math.round(firstTerm, 2) == 1) {
+                firstTerm = 1;
+            }
+            return (String.raw `S^{2} + ${firstTerm}S + ${secondTerm}`);
+        } else {
+            var firstTerm = math.round(a, 3);
+            return (String.raw `S + ${firstTerm}`);
+        }
+    
+    }
+    rootsToDisplay = []
+    for (let index = 1; index <= math.ceil(vars.selectedOrder/2); index++) {
+        rootsToDisplay.push(deduceEquation(-vars.sigma[`sigma${index}`], -vars.omega[`omega${index}`], vars.selectedOrder, index-1));
+    }
+    document.getElementById("finalH1s").innerHTML = String.raw `<p>\( H_{1}(S) = \frac {K}{(${rootsToDisplay.join(")(")})} \)</p>`
+}
+
+// Function to display value of K
+function displayK() {
+    if (vars.selectedOrder%2 == 1) {
+        // If Odd
+        var kFormula = String.raw `<p>\( K = b_{0} = ${vars.k}\)</p>`
+    }else{
+        // If Even
+        var kFormula = String.raw `<p>\( K = \frac {b_{0}} {\sqrt { 1 + \varepsilon^{2} } } = \frac {${vars.b0}} {\sqrt { 1 + ${vars.epsilon}^{2} } }\)</p>
+        <p>\( K = ${vars.k} \)</p>`
+    }
+
+
+    document.getElementById("kFormula").innerHTML = kFormula;
+}
 
 
 
@@ -244,6 +289,8 @@ function displayResults() {
     displayRootsWithoutValues();
     displaySigmaKAndOmegaK();
     displaySigmasAndOmegas();
+    displayNormallisedEquation();
+    displayK();
 }
 
 // Debug mode
@@ -259,11 +306,10 @@ function debug() {
 function designchebyshev() {
 
     // Debug mode for easier debugging
-    // debug(); // Comment out in production
+    debug(); // Comment out in production
 
     // All Calculations are done from this function]
-    let valid = checkFormValidity();
-    if (valid) {
+    if (checkFormValidity()) {
         getAndProcessParameters();
         displayResults();
 
