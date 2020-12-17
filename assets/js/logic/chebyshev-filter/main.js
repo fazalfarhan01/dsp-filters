@@ -274,7 +274,7 @@ function displayK() {
 
 
 
-
+// Function to check errors in form
 function checkFormValidity() {
     return document.getElementById("filterDesignerForm").checkValidity();
 }
