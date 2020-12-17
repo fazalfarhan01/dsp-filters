@@ -306,7 +306,7 @@ function debug() {
 function designchebyshev() {
 
     // Debug mode for easier debugging
-    debug(); // Comment out in production
+    // debug(); // Comment out in production
 
     // All Calculations are done from this function]
     if (checkFormValidity()) {
