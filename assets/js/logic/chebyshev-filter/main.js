@@ -117,14 +117,13 @@ function findEpsilonAndOrder(variables) {
     return variables;
 }
 
-
 // Function to find roots
 function findRoots(variables) {
     variables.sigma = {};
     variables.omega = {};
     for (let index = 1; index <= variables.selectedOrder; index++) {
-        variables.sigma[`sigma${index}`] = -math.sinh((1 / variables.selectedOrder) * math.asinh(1 / variables.epsilon)) * math.sin(((2 * index - 1) / (2 * variables.selectedOrder)) * math.PI);
-        variables.omega[`omega${index}`] = math.cosh((1 / variables.selectedOrder) * math.asinh(1 / variables.epsilon)) * math.cos(((2 * index - 1) / (2 * variables.selectedOrder)) * math.PI);
+        variables.sigma[`sigma${index}`] = math.round(-math.sinh((1 / variables.selectedOrder) * math.asinh(1 / variables.epsilon)) * math.sin(((2 * index - 1) / (2 * variables.selectedOrder)) * math.PI), 3);
+        variables.omega[`omega${index}`] = math.round(math.cosh((1 / variables.selectedOrder) * math.asinh(1 / variables.epsilon)) * math.cos(((2 * index - 1) / (2 * variables.selectedOrder)) * math.PI), 3);
     }
     return variables;
 }
@@ -144,16 +143,132 @@ function findK(variables) {
     return variables;
 }
 
-
-function designchebyshev() {
+function getAndProcessParameters() {
     vars = getVars();
     vars = convertToDecibles(vars);
     vars = normalliseSpecifications(vars);
     vars = findEpsilonAndOrder(vars);
     vars = findRoots(vars);
     vars = findK(vars);
-    console.log(vars);
-    MathJax.typeset();
+}
+
+// function to display given values
+function displayGiven() {
+    var passBandParameters = String.raw `<p>\( A_{p} = ${vars.minPassBandGain} \space db\)</p>
+    <p>\( \Omega_{p} = ${vars.passBandFrequency} \space rad/s \)</p>`;
+    var stopBandParameters = String.raw `<p>\( A_{s} = ${vars.maxStopBandGain} \space db\)</p>
+    <p>\( \Omega_{s} = ${vars.stopBandFrequency} \space rad/s \)</p>`;
+
+    document.getElementById("passBandParameters").innerHTML = passBandParameters;
+    document.getElementById("stopBandParameters").innerHTML = stopBandParameters;
+}
+
+// function to display normallised frequencies
+function displayNormallisedCutoffs() {
+    var normallisedOmegaP = String.raw `<p>\( \Omega_{p}^{'} = \frac {\Omega_{p}}{\Omega_{p}} \)</p>
+    <p>\( \Omega_{p}^{'} = \frac {${vars.passBandFrequency}}{${vars.passBandFrequency}} = ${vars.normPassBandFrequency} \space rad/s\)</p>`;
+    var normallisedOmegaS = String.raw `<p>\( \Omega_{s}^{'} = \frac {\Omega_{s}}{\Omega_{p}} \)</p>
+    <p>\( \Omega_{s}^{'} = \frac {${vars.stopBandFrequency}}{${vars.passBandFrequency}} = ${vars.normStopBandFrequency} \space rad/s\)</p>`;
+
+    document.getElementById("normallisedOmegaP").innerHTML = normallisedOmegaP;
+    document.getElementById("normallisedOmegaS").innerHTML = normallisedOmegaS;
+}
+
+// Function to show ripple factor
+function displayRippleFactor() {
+    var epsilonWithFormula = String.raw `<p>\( \varepsilon = \sqrt { 10^{ 0.1 \times ${vars.minPassBandGain} } -1} \)<p>
+    <p>\( \varepsilon = ${vars.epsilon} \)</p>`;
+    document.getElementById("epsilonWithFormula").innerHTML = epsilonWithFormula;
+}
+
+// Function to display order => N
+function displayOrder() {
+    var orderWithFormula = String.raw `<p>\(N = \frac {${vars.minPassBandGain} - 20 log_{10}(${vars.epsilon})+6} {6+20log_{10}(${vars.normStopBandFrequency})} \)</p>`;
+    var order = String.raw `<p> \( N = ${vars.order} \space \space N = ${vars.selectedOrder}\) </p>`
+    document.getElementById("orderFormulaWithValues").innerHTML = orderWithFormula;
+    document.getElementById("finalOrder").innerHTML = order;
+}
+
+// Funuction to display roots from order
+function displayRootsWithoutValues() {
+    rootsList = [];
+    for (let index = 1; index <= vars.selectedOrder; index++) {
+        rootsList.push(`S-S_{${index}}`);
+    }
+
+    rootsBasedOnOrder = String.raw `<p>\( H_{1}(s) = \frac { K } { (${rootsList.join(" )( ")}) } \)</p>`;
+
+    document.getElementById("rootsBasedOnOrder").innerHTML = rootsBasedOnOrder;
+}
+
+// Function to show sigma and omega formula
+function displaySigmaKAndOmegaK() {
+    var sigmaKFormula = String.raw `<p> \(  \sigma_{k} = -Sinh[ \frac {1}{N} Sinh^{-1}( \frac {1} {\varepsilon} ) ] \times Sin(\frac { 2K-1 } {2N} \pi) \) </p>`
+    var omegaKFormula = String.raw `<p> \(  \Omega_{k} = Cosh[ \frac {1}{N} Sinh^{-1}( \frac {1} {\varepsilon} ) ] \times Cos(\frac { 2K-1 } {2N} \pi) \) </p>`
+    document.getElementById("sigmaKFormula").innerHTML = sigmaKFormula;
+    document.getElementById("omegaKFormula").innerHTML = omegaKFormula;
+}
+
+// Function to show sigmas and omegas
+function displaySigmasAndOmegas() {
+    var sigmas = [];
+    var omegas = [];
+
+    for (let index = 1; index <= vars.selectedOrder; index++) {
+        sigmas.push(String.raw `\sigma_{${index}} = ${vars.sigma[`sigma${index}`]}`);
+        omegas.push(String.raw `\Omega_{${index}} = ${vars.omega[`omega${index}`]}`);
+    }
+
+    var sigmaString = String.raw `<p> \( ${sigmas.join("\\) </p><p> \\(")} \) </p>`;
+    var omegaString = String.raw `<p> \( ${omegas.join("\\) </p><p> \\(")} \) </p>`;
+
+    document.getElementById("sigmas").innerHTML = sigmaString;
+    document.getElementById("omegas").innerHTML = omegaString;
+}
+
+
+
+
+
+function checkFormValidity() {
+    return document.getElementById("filterDesignerForm").checkValidity();
+}
+
+// Showing Results div
+function displayResults() {
+    document.getElementById("results").style.display = "block";
+    displayGiven();
+    displayNormallisedCutoffs();
+    displayRippleFactor();
+    displayOrder();
+    displayRootsWithoutValues();
+    displaySigmaKAndOmegaK();
+    displaySigmasAndOmegas();
+}
+
+// Debug mode
+function debug() {
+    document.getElementById("gainType").value = "decibles"; // decibles or direct
+    document.getElementById("minPassBandGain").value = "2.5"
+    document.getElementById("maxStopBandGain").value = "30"
+    document.getElementById("passBandFrequency").value = "20"
+    document.getElementById("stopBandFrequency").value = "50"
+    document.getElementById("filterType").value = "lp"
+}
+
+function designchebyshev() {
+
+    // Debug mode for easier debugging
+    // debug(); // Comment out in production
+
+    // All Calculations are done from this function]
+    let valid = checkFormValidity();
+    if (valid) {
+        getAndProcessParameters();
+        displayResults();
+
+        MathJax.typeset();
+    }
 }
 
 function clearResults() {;

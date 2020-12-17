@@ -177,51 +177,83 @@
 
                         <!-- Results -->
                         <hr>
-                        <!-- Step 1 -->
-                        <div id="step1">
-                            <div class="row">
-                                <h1>Step 1: Obtaining Normallised Specifications</h1>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 col-12-medium" id="givenGains"></div>
-                                <div class="col-6 col-12-medium" id="givenFrequencis"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 col-12-medium" id="normallisedOmegaP"></div>
-                                <div class="col-6 col-12-medium" id="normallisedOmegaS"></div>
-                            </div>
-                        </div>
-
-                        <!-- Step 2 -->
-                        <div id="step2">
-                            <div class="row" style="text-align: center;">
-                                <h1>Step 2: Determining ε - Ripple Factor</h1>
-                            </div>
-                            <div class="row" style="text-align: center;">
-                                <div class="col-4 col-12-small">
-                                    <p>\(\epsilon = \sqrt {10^{0.1 \times A_{p}}-1}\)</p>
+                        <div id="results" style="display: none;">
+                            <!-- Given -->
+                            <div id="given">
+                                <div class="row">
+                                    <h1>Given:</h1>
                                 </div>
-                                <div class="col-4 col-12-small" id="epsilonWithFormula"></div>
-                                <div class="col-4 col-12-small" id="finalEpsilon"></div>
-                            </div>
-                        </div>
-
-                        <!-- Step 3 -->
-                        <div id="step3">
-                            <div class="row">
-                                <h1>Step 3: Determine Order N</h1>
-                            </div>
-                            <div class="row" style="text-align: center;">
-                                <div class="col-12">
-                                    <p>
-                                        \( \mid H(\Omega) \mid _{db} = -20 log_{10}(\epsilon)-6(N-1)-20log_{10}(\Omega_{s}^{'}) \)
-                                    </p>
-                                    <p>
-                                        \(N = \frac {A_{s} - 20 log_{10}(\epsilon)+6} {6+20log_{10}(\Omega_{s}^{'})} \)
-                                    </p>
+                                <div class="row">
+                                    <div class="col-6 col-12-medium">
+                                        <div id="passBandParameters"></div>
+                                    </div>
+                                    <div class="col-6 col-12-medium">
+                                        <div id="stopBandParameters"></div>
+                                    </div>
                                 </div>
-                                <div class="col-6 col-12-medium" id="orderFormulaWithValues"></div>
-                                <div class="col-6 col-12-medium" id="finalOrder"></div>
+                            </div>
+
+                            <!-- Step 1 -->
+                            <div id="step1">
+                                <div class="row">
+                                    <h1>Step 1: Obtaining Normallised Specifications</h1>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-12-medium" id="normallisedOmegaP"></div>
+                                    <div class="col-6 col-12-medium" id="normallisedOmegaS"></div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div id="step2">
+                                <div class="row" style="text-align: center;">
+                                    <h1>Step 2: Determining ε - Ripple Factor</h1>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-12-small">
+                                        <p>\(\varepsilon = \sqrt {10^{0.1 \times A_{p}}-1}\)</p>
+                                    </div>
+                                    <div class="col-6 col-12-small" id="epsilonWithFormula"></div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div id="step3">
+                                <div class="row">
+                                    <h1>Step 3: Determine Order N</h1>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="text-align: center;">
+                                        <p>
+                                            \( \mid H(\Omega) \mid _{db} = -20 log_{10}(\varepsilon)-6(N-1)-20log_{10}(\Omega_{s}^{'}) \)
+                                        </p>
+                                    </div>
+                                    <div class="col-6 col-12-medium" style="text-align: center;">
+                                        <p>
+                                            \(N = \frac {A_{s} - 20 log_{10}(\varepsilon)+6} {6+20log_{10}(\Omega_{s}^{'})} \)
+                                        </p>
+                                    </div>
+                                    <div class="col-6 col-12-medium" id="orderFormulaWithValues" style="text-align: center;"></div>
+                                    <div class="col-12" id="finalOrder" style="text-align: center;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div id="step4">
+                                <div class="row">
+                                    <h1>Step 4: Find Roots and H<sub>1</sub>(S)</h1>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="text-align: center;" id="rootsBasedOnOrder"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" id="sigmaKFormula" style="text-align: center;"></div>
+                                    <div class="col-12" id="omegaKFormula" style="text-align: center;"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-12-small" id="sigmas" style="text-align: center;"></div>
+                                    <div class="col-6 col-12-small" id="omegas" style="text-align: center;"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
