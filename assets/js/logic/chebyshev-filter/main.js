@@ -273,6 +273,104 @@ function displayK() {
 }
 
 
+// ***********************************
+
+// Denormallisation Part
+
+function diaplayDeNormallised() {
+    let filterType = document.getElementById("filterType").value;
+    switch (filterType) {
+        case "lp":
+            // If Filter is a Low Pass
+            var numerator = math.parse((vars.k * math.pow(vars.passBandFrequency, vars.selectedOrder)).toExponential(2)).toTex();
+            break;
+        case "hp":
+            var numerator = math.parse(String.raw `${vars.k} S^${vars.selectedOrder}`).toTex();
+            break;
+        case "bp":
+            break;
+        default:
+            break;
+    }
+    var denominator = getDenominator();
+
+    var replacement = getReplacement();
+    var deNormallisedEquation = getFinalDeNormalised(numerator, denominator);
+
+    document.getElementById("deNormallised").innerHTML = replacement + deNormallisedEquation;
+    // console.log(denominator)
+}
+
+function getDenominator() {
+    simplifiedDeNormallisedEquation = []
+
+    for (let index = 1; index <= math.ceil(vars.selectedOrder/2); index++) {
+        simplifiedDeNormallisedEquation.push(deduceDenominator(-vars.sigma[`sigma${index}`], -vars.omega[`omega${index}`], vars.selectedOrder, index-1, vars.passBandFrequency));
+    }
+
+    return simplifiedDeNormallisedEquation;
+}
+
+function deduceDenominator(a, b, order, index, cutoff) {
+
+    // console.log(a, b);
+    // if order is even
+    let filterType = document.getElementById("filterType").value;
+    let cutoffSquared = cutoff ** 2;
+    switch (filterType) {
+        // For LPF
+        case "lp":
+            if ((order % 2 == 0) || (index < Math.floor(order / 2))) {
+                var firstTerm = (2 * a * cutoff).toExponential(2);
+                var secondTerm = (cutoffSquared * (a ** 2 + b ** 2)).toExponential(2);
+                return (math.parse(String.raw `S^2 + ${firstTerm} S + ${secondTerm}`).toTex());
+            } else {
+                var firstTerm = math.round(a, 3);
+                // return (math.parse(String.raw `${cutoff}S + ${(firstTerm * cutoff**2).toExponential(2)}`).toTex());
+                return (math.parse(String.raw `S + ${(firstTerm * cutoff).toExponential(2)}`).toTex());
+            }
+            break;
+
+            // For HPF
+        case "hp":
+            if ((order % 2 == 0) || (index < Math.floor(order / 2))) {
+                var firstTerm = (a ** 2 + b ** 2).toExponential(2);
+                var secondTerm = (2 * a * cutoff).toExponential(2);
+                return (math.parse(String.raw `${firstTerm}S^2 + ${secondTerm} S + ${(cutoffSquared).toExponential(2)}`).toTex());
+            } else {
+                var firstTerm = math.round(a, 3);
+                return (math.parse(String.raw `${cutoff} + ${firstTerm}S`).toTex());
+            }
+            break;
+        case "bp":
+            break;
+        default:
+            break;
+    }
+
+}
+
+function getFinalDeNormalised(numerator, denominator) {
+    return String.raw `<p>\( H(S) = \frac {${numerator}} {(${denominator.join(" )( ")})} \)</p>`;
+}
+
+// Function that returns the freq transformation type
+function getReplacement() {
+    let filterType = document.getElementById("filterType").value;
+    let replacementString = "";
+    if (filterType == "lp") {
+        replacementString = String.raw `<p>\( S \Rightarrow \frac {S}{\Omega_{p}} \)</p>
+        <p>\( S \Rightarrow \frac {S}{${math.round(vars.passBandFrequency,3)}} \)</p>`
+    } else if (filterType == "hp") {
+        replacementString = String.raw `<p>\( S \Rightarrow \frac {\Omega_{p}}{S} \)</p>
+        <p>\( S \Rightarrow \frac {${math.round(vars.passBandFrequency,3)}}{S} \)</p>`
+    }
+    return replacementString;
+}
+
+// ***********************************
+
+
 
 // Function to check errors in form
 function checkFormValidity() {
@@ -291,6 +389,7 @@ function displayResults() {
     displaySigmasAndOmegas();
     displayNormallisedEquation();
     displayK();
+    diaplayDeNormallised();
 }
 
 // Debug mode
