@@ -188,7 +188,7 @@ function displayRippleFactor() {
 
 // Function to display order => N
 function displayOrder() {
-    var orderWithFormula = String.raw `<p>\(N = \frac {${vars.minPassBandGain} - 20 log_{10}(${vars.epsilon})+6} {6+20log_{10}(${vars.normStopBandFrequency})} \)</p>`;
+    var orderWithFormula = String.raw `<p>\(N = \frac {${vars.maxStopBandGain} - 20 log_{10}(${vars.epsilon})+6} {6+20log_{10}(${vars.normStopBandFrequency})} \)</p>`;
     var order = String.raw `<p> \( N = ${vars.order} \space \space N = ${vars.selectedOrder}\) </p>`
     document.getElementById("orderFormulaWithValues").innerHTML = orderWithFormula;
     document.getElementById("finalOrder").innerHTML = order;
